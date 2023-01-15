@@ -4,6 +4,7 @@ from pprint import pprint
 from math import ceil
 
 
+
 #1
 def weight_loss_time(weight, desired_weight,age,height):
     weight_loss_rate = weight - desired_weight
@@ -11,7 +12,7 @@ def weight_loss_time(weight, desired_weight,age,height):
     days_needed = deficit_needed / deficit_per_day
     recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
     return days_needed
-    
+
 """
 weight = float(input("Enter your current weight in kg: "))
 height = float(input("Enter your height (in cm): "))
@@ -51,8 +52,74 @@ print("and will take approximately {} weeks to reach your desired weight.".forma
 
 """
 
-def main():
+#3
 
+
+### ADD TRY EXCEPT BS###
+def weight_change():
+    while True:
+        weight_change = input("Would you like to lose or gain weight? (lose or gain): ")
+        if weight_change == "lose":
+            weight = float(input("Enter your current weight in kg: "))
+            height = float(input("Enter your height (in cm): "))
+            age = int(input("Enter your age: "))
+            desired_weight = float(input("Enter your desired weight in kg: "))
+            recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
+            time = weight_loss_time(weight, desired_weight,age,height)
+            print(f"You should eat about  {recomended_deficit} calories per day for about {time} days")
+            deficit_per_day = recomended_deficit 
+            weight_loss_time(weight, desired_weight,age,height)
+            break
+        elif weight_change == "gain":
+            weight = float(input("Enter your current weight (in kg): "))
+            height = float(input("Enter your height (in cm): "))
+            age = int(input("Enter your age: "))
+            desired_weight = float(input("Enter your desired weight (in kg): "))
+            calories_per_day, time_to_reach_desired_weight = weight_gain_time(weight, height, age, desired_weight)
+            print("To gain weight, you should consume approximately", calories_per_day, "calories per day.")
+            print("It will take approximately {} weeks to reach your desired weight.".format(time_to_reach_desired_weight))
+            weight_gain_time(weight, height, age, desired_weight)
+            break
+        else:
+            print("Invalid response, please enter either 'lose' or 'gain'")
+
+def weight_loss_time(weight, desired_weight,age,height):
+    weight_loss_rate = weight - desired_weight
+    deficit_needed = weight_loss_rate * 7700
+    recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
+    deficit_per_day = recomended_deficit
+    days_needed = deficit_needed / deficit_per_day
+    return days_needed
+
+
+
+
+#def wight gain function here
+
+
+weight_change()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+def main():
+"""
 
 # 1 weight loss commands 
 """
@@ -69,7 +136,6 @@ deficit_per_day = recomended_deficit
 time = weight_loss_time(weight, desired_weight,age,height)
 print(f"You should eat about  {recomended_deficit} calories per day for about {time} days") 
 print(f"You should eat about  {recomended_deficit2} calories per day for about {time} days") 
-
 """
 
 
