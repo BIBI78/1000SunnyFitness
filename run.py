@@ -40,6 +40,7 @@ def weight_gain_time(weight, height, age, desired_weight):
     weight_gain_time = BMR * 1.55
     time_to_reach_desired_weight = (desired_weight - weight) / 0.5
     return weight_gain_time, time_to_reach_desired_weight
+
 """
 weight = float(input("Enter your current weight (in kg): "))
 height = float(input("Enter your height (in cm): "))
@@ -74,10 +75,10 @@ def weight_change():
             weight = float(input("Enter your current weight (in kg): "))
             height = float(input("Enter your height (in cm): "))
             age = int(input("Enter your age: "))
-            desired_weight = float(input("Enter your desired weight (in kg): "))
+            desired_weight = float(input("Enter the weight youd like to build up to (in kg): "))
             calories_per_day, time_to_reach_desired_weight = weight_gain_time(weight, height, age, desired_weight)
-            print("To gain weight, you should consume approximately", calories_per_day, "calories per day.")
-            print("It will take approximately {} weeks to reach your desired weight.".format(time_to_reach_desired_weight))
+            print("To gain this weight, you should eat about", ceil(calories_per_day), "calories per day.")
+            print("and will take approximately {} weeks to reach your desired weight.".format(time_to_reach_desired_weight))
             weight_gain_time(weight, height, age, desired_weight)
             break
         else:
@@ -94,7 +95,12 @@ def weight_loss_time(weight, desired_weight,age,height):
 
 
 
-#def wight gain function here
+def weight_gain_time(weight, height, age, desired_weight):
+    # this is the bmr for weight loss ?
+    BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
+    weight_gain_time = BMR * 1.55
+    time_to_reach_desired_weight = (desired_weight - weight) / 0.5
+    return weight_gain_time, time_to_reach_desired_weight
 
 
 weight_change()
