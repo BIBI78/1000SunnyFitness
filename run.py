@@ -32,6 +32,7 @@ print(f"You should eat about  {recomended_deficit2} calories per day for about {
 #2
 
 def weight_gain_time(weight, height, age, desired_weight):
+    # this is the bmr for weight loss ?
     BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
     weight_gain_time = BMR * 1.55
     time_to_reach_desired_weight = (desired_weight - weight) / 0.5
