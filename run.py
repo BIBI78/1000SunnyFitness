@@ -3,11 +3,11 @@ from google.oauth2.service_account import Credentials
 from pprint import pprint
 
 
-
 def weight_loss_time(weight, desired_weight,age,height):
     weight_loss_rate = weight - desired_weight
     deficit_needed = weight_loss_rate * 7700
     days_needed = deficit_needed / deficit_per_day
+    recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
     return days_needed
 
 weight = float(input("Enter your current weight in kg: "))
