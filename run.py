@@ -3,6 +3,18 @@ from google.oauth2.service_account import Credentials
 from pprint import pprint
 from math import ceil
 
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('1000_sunny_fitness')
+
+
 
 
 #1
@@ -103,13 +115,17 @@ def weight_gain_time(weight, height, age, desired_weight):
     return weight_gain_time, time_to_reach_desired_weight
 
 
-weight_change()
+#weight_change()
 
 
 
 
 
+sales = SHEET.worksheet('Sheet1')
+data = sales.get_all_values()
 
+
+print(data)
 
 
 
