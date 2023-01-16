@@ -259,6 +259,10 @@ def update_sales_worksheet(data):
 
 
 def main():
-data = get_user_data()
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
+    data = get_user_data()
+    sales_data = [int(num) for num in data]
+    update_sales_worksheet(sales_data)
+    weight_change()
+
+
+main()
