@@ -211,13 +211,15 @@ def get_user_data():
     by commas. The loop will repeatedly request data, until it is valid.
     """
     while True:
-        print("Please enter sales data from the last market.")
-        print("Data should be six numbers, separated by commas.")
-        print("Example: 10,20,30,40,50,60\n")
+        print ("please answer the following questions")
+        weight = float(input("Enter your current weight (in kg): "))
+        height = float(input("Enter your height (in cm): "))
+        age = int(input("Enter your age: "))
+        desired_weight = float(input("Enter your desired weight (in kg): "))
 
-        data_str = input("Enter your data here: ")
+        #data_str = input("Enter your data here: ")
 
-        sales_data = data_str.split(",")
+        sales_data = (weight,height,age,desired_weight)
 
         if validate_data(sales_data):
             print("Data is valid!")
@@ -234,7 +236,7 @@ def validate_data(values):
     """
     try:
         [int(value) for value in values]
-        if len(values) != 6:
+        if len(values) != 4:
             raise ValueError(
                 f"Exactly 6 values required, you provided {len(values)}"
             )
@@ -255,6 +257,6 @@ def update_sales_worksheet(data):
     print("Sales worksheet updated successfully.\n")
 
 
-data = get_sales_data()
+data = get_user_data()
 sales_data = [int(num) for num in data]
 update_sales_worksheet(sales_data)
