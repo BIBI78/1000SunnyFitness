@@ -47,7 +47,7 @@ print(f"You should eat about  {recomended_deficit2} calories per day for about {
 #2
 
 def weight_gain_time(weight, height, age, desired_weight):
-    # this is the bmr for weight loss ?
+    # this is the bmr for weight loss 
     BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
     weight_gain_time = BMR * 1.55
     time_to_reach_desired_weight = (desired_weight - weight) / 0.5
@@ -68,15 +68,15 @@ print("and will take approximately {} weeks to reach your desired weight.".forma
 #3
 
 
-### ADD TRY EXCEPT BS###
+###option function###
 def weight_change():
     while True:
-        weight_change = input("Would you like to lose or gain weight? (lose or gain): ")
+        weight_change = input("Would you like to lose or gain weight? (lose or gain): \n")
         if weight_change == "lose":
-            weight = float(input("Enter your current weight in kg: "))
-            height = float(input("Enter your height (in cm): "))
+            weight = float(input("Enter your current weight in kg:\n "))
+            height = float(input("Enter your height (in cm): \n"))
             age = int(input("Enter your age: "))
-            desired_weight = float(input("Enter your desired weight in kg: "))
+            desired_weight = float(input("Enter your desired weight in kg: \n"))
             recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
             time = weight_loss_time(weight, desired_weight,age,height)
             print(f"You should eat about  {recomended_deficit} calories per day for about {time} days")
@@ -84,10 +84,10 @@ def weight_change():
             weight_loss_time(weight, desired_weight,age,height)
             break
         elif weight_change == "gain":
-            weight = float(input("Enter your current weight (in kg): "))
-            height = float(input("Enter your height (in cm): "))
+            weight = float(input("Enter your current weight (in kg): \n"))
+            height = float(input("Enter your height (in cm): \n"))
             age = int(input("Enter your age: "))
-            desired_weight = float(input("Enter the weight youd like to build up to (in kg): "))
+            desired_weight = float(input("Enter the weight youd like to build up to (in kg): \n"))
             calories_per_day, time_to_reach_desired_weight = weight_gain_time(weight, height, age, desired_weight)
             print("To gain this weight, you should eat about", ceil(calories_per_day), "calories per day.")
             print("and will take approximately {} weeks to reach your desired weight.".format(time_to_reach_desired_weight))
@@ -128,10 +128,10 @@ def main():
 
 # 1 weight loss commands 
 """
-weight = float(input("Enter your current weight in kg: "))
-height = float(input("Enter your height (in cm): "))
-age = int(input("Enter your age: "))
-desired_weight = float(input("Enter your desired weight in kg: "))
+weight = float(input("Enter your current weight in kg:\n "))
+height = float(input("Enter your height (in cm): \n"))
+age = int(input("Enter your age:\n "))
+desired_weight = float(input("Enter your desired weight in kg: \n"))
 recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
 
 #tried to use the same eqn i used for the gain weight function but it didnt reallly make sense
@@ -146,10 +146,10 @@ print(f"You should eat about  {recomended_deficit2} calories per day for about {
 
 #2 weight gain commands
 """
-weight = float(input("Enter your current weight (in kg): "))
-height = float(input("Enter your height (in cm): "))
-age = int(input("Enter your age: "))
-desired_weight = float(input("Enter the weight youd like to build up to (in kg): "))
+weight = float(input("Enter your current weight (in kg): \n"))
+height = float(input("Enter your height (in cm): \n"))
+age = int(input("Enter your age: \n"))
+desired_weight = float(input("Enter the weight youd like to build up to (in kg): \n"))
 
 calories_per_day,time_to_reach_desired_weight = weight_gain_time(weight, height, age, desired_weight)
 print("To gain this weight, you should eat about", ceil(calories_per_day), "calories per day.")
@@ -211,11 +211,11 @@ def get_user_data():
     by commas. The loop will repeatedly request data, until it is valid.
     """
     while True:
-        print ("please answer the following questions")
-        weight = float(input("Enter your current weight (in kg): "))
-        height = float(input("Enter your height (in cm): "))
+        print ("please answer the following questions\n")
+        weight = float(input("Enter your current weight (in kg): \n"))
+        height = float(input("Enter your height (in cm):\n "))
         age = int(input("Enter your age: "))
-        desired_weight = float(input("Enter your desired weight (in kg): "))
+        desired_weight = float(input("Enter your desired weight (in kg): \n"))
 
         #data_str = input("Enter your data here: ")
 
@@ -257,6 +257,8 @@ def update_sales_worksheet(data):
     print("Sales worksheet updated successfully.\n")
 
 
+
+def main():
 data = get_user_data()
 sales_data = [int(num) for num in data]
 update_sales_worksheet(sales_data)
