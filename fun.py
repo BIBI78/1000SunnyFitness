@@ -36,8 +36,9 @@ def weight_gain_time(weight, height, age, desired_weight):
 
 def weight_change():
     while True:
-        weight_change = input("Would you like to lose or gain weight? (lose or gain): \n")
+        weight_change = input("WELCOME TO 1000 SUNNY FITNESS \n Would you like to lose or gain weight? (lose or gain): \n")
         if weight_change == "lose":
+            print("Please answer the following questions\n")
             weight = float(input("Enter your current weight in kg:\n "))
             height = float(input("Enter your height (in cm): \n"))
             age = int(input("Enter your age: "))
@@ -49,6 +50,7 @@ def weight_change():
             weight_loss_time(weight, desired_weight,age,height)
             break
         elif weight_change == "gain":
+            print("Please answer the following questions\n")
             weight = float(input("Enter your current weight (in kg): \n"))
             height = float(input("Enter your height (in cm): \n"))
             age = int(input("Enter your age: "))
@@ -60,6 +62,19 @@ def weight_change():
             break
         else:
             print("Invalid response, please enter either 'lose' or 'gain'")
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
