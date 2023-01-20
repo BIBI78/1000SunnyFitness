@@ -18,8 +18,11 @@ SHEET = GSPREAD_CLIENT.open('1000_sunny_fitness')
 def weight_loss_time(weight, desired_weight,age,height):
     weight_loss_rate = weight - desired_weight
     deficit_needed = weight_loss_rate * 7700
+    recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
+    deficit_per_day = recomended_deficit 
     days_needed = deficit_needed / deficit_per_day
     recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
+    deficit_needed = recomended_deficit
     return days_needed
 #2
 
@@ -58,3 +61,11 @@ def weight_change():
         else:
             print("Invalid response, please enter either 'lose' or 'gain'")
 
+
+
+def main ():
+    weight_change()
+
+
+
+main()
