@@ -211,7 +211,7 @@ def get_user_data():
     by commas. The loop will repeatedly request data, until it is valid.
     """
     while True:
-        print ("please answer the following questions\n")
+        print ("WELCOME TO 1000 SUNNY FITNESS\n please answer the following questions WESH\n")
         weight = float(input("Enter your current weight (in kg): \n"))
         height = float(input("Enter your height (in cm):\n "))
         age = int(input("Enter your age: "))
@@ -219,13 +219,13 @@ def get_user_data():
 
         #data_str = input("Enter your data here: ")
 
-        sales_data = (weight,height,age,desired_weight)
+        user_data = (weight,height,age,desired_weight)
 
-        if validate_data(sales_data):
+        if validate_data(user_data):
             print("Data is valid!")
             break
 
-    return sales_data
+    return user_data
 
 
 def validate_data(values):
@@ -260,8 +260,8 @@ def update_sales_worksheet(data):
 
 def main():
     data = get_user_data()
-    sales_data = [int(num) for num in data]
-    update_sales_worksheet(sales_data)
+    user_data = [int(num) for num in data]
+    update_sales_worksheet(user_data)
     weight_change()
 
 
