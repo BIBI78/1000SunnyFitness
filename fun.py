@@ -14,6 +14,8 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('1000_sunny_fitness')
 
+
+
 #1
 def weight_loss_time(weight, desired_weight,age,height):
     weight_loss_rate = weight - desired_weight
@@ -23,7 +25,8 @@ def weight_loss_time(weight, desired_weight,age,height):
     days_needed = deficit_needed / deficit_per_day
     recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
     deficit_needed = recomended_deficit
-    return days_needed
+    #user_data = (weight,height,age,desired_weight)
+    return days_needed 
 #2
 
 def weight_gain_time(weight, height, age, desired_weight):
@@ -31,6 +34,7 @@ def weight_gain_time(weight, height, age, desired_weight):
     BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
     weight_gain_time = BMR * 1.55
     time_to_reach_desired_weight = (desired_weight - weight) / 0.5
+    #user_data = (weight,height,age,desired_weight)
     return weight_gain_time, time_to_reach_desired_weight
 
 
@@ -48,6 +52,7 @@ def weight_change():
             print(f"You should eat about  {recomended_deficit} calories per day for about {time} days")
             deficit_per_day = recomended_deficit 
             weight_loss_time(weight, desired_weight,age,height)
+            user_data = (weight,height,age,desired_weight)
             break
         elif weight_change == "gain":
             print("Please answer the following questions\n")
@@ -59,28 +64,56 @@ def weight_change():
             print("To gain this weight, you should eat about", ceil(calories_per_day), "calories per day.")
             print("and will take approximately {} weeks to reach your desired weight.".format(time_to_reach_desired_weight))
             weight_gain_time(weight, height, age, desired_weight)
+            user_data = (weight,height,age,desired_weight)
             break
         else:
             print("Invalid response, please enter either 'lose' or 'gain'")
 
+def stored_user_data():
+    weight, age , height,desired_weight = weight_change()
+    user_data = (weight,height,age,desired_weight)
+    return user_data,
+
+
+
+
+# USE THIS TO VALIDATE DATA #
+def validate_data(values):
+    """
+    Inside the try, converts all string values into integers.
+    Raises ValueError if strings cannot be converted into int,
+    or if there aren't exactly 6 values.
+    """
+    try:
+        [int(value) for value in values]
+        if len(values) != 4:
+            raise ValueError(
+                f"Exactly 6 values required, you provided {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False
+
+    return True
 
 
 
 
 
-
-
-
-
-
-
+# DECLARE GLOBAL VARIABLES HERE?? #
+ #user_data = (weight,height,age,desired_weight)
+ # maybe define user ddata and weight in another fucntion that does ask the user anything in the terminal 
 
 
 
 
 def main ():
     weight_change()
-
+    stored_user_data()
+   
+    
+  
+    
 
 
 main()
