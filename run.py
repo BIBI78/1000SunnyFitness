@@ -14,36 +14,40 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('1000_sunny_fitness')
 
-
+# Pirate flag #
+def draw_jolly_roger():
+    print("WELCOME TO THE 1000 SUNNY")
+    jolly_roger =  '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
+    jolly_roger += '|                     ______                     |\n'
+    jolly_roger += '|                  .-"      "-.                  |\n'
+    jolly_roger += '|                 /            \                 |\n'
+    jolly_roger += '|     _          |              |          _     |\n'
+    jolly_roger += '|    ( \         |,  .-.  .-.  ,|         / )    |\n'
+    jolly_roger += '|     > "=._     | )(__/  \__)( |     _.=" <     |\n'
+    jolly_roger += '|    (_/"=._"=._ |/     /\     \| _.="_.="\_)    |\n'
+    jolly_roger += '|           "=._"(_     ^^     _)"_.="           |\n'
+    jolly_roger += '|               "=\__|IIIIII|__/="               |\n'
+    jolly_roger += '|              _.="| \IIIIII/ |"=._              |\n'
+    jolly_roger += '|    _     _.="_.="\          /"=._"=._     _    |\n'
+    jolly_roger += '|   ( \_.="_.="     `--------`     "=._"=._/ )   |\n'
+    jolly_roger += '|    > _.="                            "=._ <    |\n'
+    jolly_roger += '|   (_/   free young thug                  \_)   |\n'
+    jolly_roger += '|                                                |\n'
+    jolly_roger += '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
+    print(jolly_roger)
 
 
 #1
 def weight_loss_time(weight, desired_weight,age,height):
     weight_loss_rate = weight - desired_weight
     deficit_needed = weight_loss_rate * 7700
+    recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
+    deficit_per_day = recomended_deficit 
     days_needed = deficit_needed / deficit_per_day
     recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
-    return days_needed
-
-"""
-weight = float(input("Enter your current weight in kg: "))
-height = float(input("Enter your height (in cm): "))
-age = int(input("Enter your age: "))
-desired_weight = float(input("Enter your desired weight in kg: "))
-recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
-
-#tried to use the same eqn i used for the gain weight function but it didnt reallly make sense
-#recomended_deficit2 = (88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)) - 500
-
-deficit_per_day = recomended_deficit
-time = weight_loss_time(weight, desired_weight,age,height)
-print(f"You should eat about  {recomended_deficit} calories per day for about {time} days") 
-print(f"You should eat about  {recomended_deficit2} calories per day for about {time} days") 
-
-"""
-
-
-
+    deficit_needed = recomended_deficit
+    #user_data = (weight,height,age,desired_weight)
+    return days_needed 
 #2
 
 def weight_gain_time(weight, height, age, desired_weight):
@@ -51,28 +55,15 @@ def weight_gain_time(weight, height, age, desired_weight):
     BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
     weight_gain_time = BMR * 1.55
     time_to_reach_desired_weight = (desired_weight - weight) / 0.5
+    #user_data = (weight,height,age,desired_weight)
     return weight_gain_time, time_to_reach_desired_weight
 
-"""
-weight = float(input("Enter your current weight (in kg): "))
-height = float(input("Enter your height (in cm): "))
-age = int(input("Enter your age: "))
-desired_weight = float(input("Enter the weight youd like to build up to (in kg): "))
 
-calories_per_day,time_to_reach_desired_weight = weight_gain_time(weight, height, age, desired_weight)
-print("To gain this weight, you should eat about", ceil(calories_per_day), "calories per day.")
-print("and will take approximately {} weeks to reach your desired weight.".format(time_to_reach_desired_weight))
-
-"""
-
-#3
-
-
-###option function###
 def weight_change():
     while True:
-        weight_change = input("Would you like to lose or gain weight? (lose or gain): \n")
+        weight_change = input("WELCOME TO 1000 SUNNY FITNESS \n Would you like to lose or gain weight? (lose or gain): \n")
         if weight_change == "lose":
+            print("Please answer the following questions\n")
             weight = float(input("Enter your current weight in kg:\n "))
             height = float(input("Enter your height (in cm): \n"))
             age = int(input("Enter your age: "))
@@ -82,8 +73,10 @@ def weight_change():
             print(f"You should eat about  {recomended_deficit} calories per day for about {time} days")
             deficit_per_day = recomended_deficit 
             weight_loss_time(weight, desired_weight,age,height)
+            user_data = (weight,height,age,desired_weight)
             break
         elif weight_change == "gain":
+            print("Please answer the following questions\n")
             weight = float(input("Enter your current weight (in kg): \n"))
             height = float(input("Enter your height (in cm): \n"))
             age = int(input("Enter your age: "))
@@ -92,142 +85,20 @@ def weight_change():
             print("To gain this weight, you should eat about", ceil(calories_per_day), "calories per day.")
             print("and will take approximately {} weeks to reach your desired weight.".format(time_to_reach_desired_weight))
             weight_gain_time(weight, height, age, desired_weight)
+            user_data = (weight,height,age,desired_weight)
             break
         else:
             print("Invalid response, please enter either 'lose' or 'gain'")
 
-def weight_loss_time(weight, desired_weight,age,height):
-    weight_loss_rate = weight - desired_weight
-    deficit_needed = weight_loss_rate * 7700
-    recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
-    deficit_per_day = recomended_deficit
-    days_needed = deficit_needed / deficit_per_day
-    return days_needed
+def stored_user_data():
+    weight, age , height,desired_weight = weight_change()
+    user_data = (weight,height,age,desired_weight)
+    return user_data,
 
 
 
 
-def weight_gain_time(weight, height, age, desired_weight):
-    # this is the bmr for weight loss ?
-    BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
-    weight_gain_time = BMR * 1.55
-    time_to_reach_desired_weight = (desired_weight - weight) / 0.5
-    return weight_gain_time, time_to_reach_desired_weight
-
-
-#weight_change()
-
-
-
-
-
-
-"""
-def main():
-"""
-
-# 1 weight loss commands 
-"""
-weight = float(input("Enter your current weight in kg:\n "))
-height = float(input("Enter your height (in cm): \n"))
-age = int(input("Enter your age:\n "))
-desired_weight = float(input("Enter your desired weight in kg: \n"))
-recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
-
-#tried to use the same eqn i used for the gain weight function but it didnt reallly make sense
-#recomended_deficit2 = (88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)) - 500
-
-deficit_per_day = recomended_deficit
-time = weight_loss_time(weight, desired_weight,age,height)
-print(f"You should eat about  {recomended_deficit} calories per day for about {time} days") 
-print(f"You should eat about  {recomended_deficit2} calories per day for about {time} days") 
-"""
-
-
-#2 weight gain commands
-"""
-weight = float(input("Enter your current weight (in kg): \n"))
-height = float(input("Enter your height (in cm): \n"))
-age = int(input("Enter your age: \n"))
-desired_weight = float(input("Enter the weight youd like to build up to (in kg): \n"))
-
-calories_per_day,time_to_reach_desired_weight = weight_gain_time(weight, height, age, desired_weight)
-print("To gain this weight, you should eat about", ceil(calories_per_day), "calories per day.")
-print("and will take approximately {} weeks to reach your desired weight.".format(time_to_reach_desired_weight))
-"""
-
-
-"""
-
-sales = SHEET.worksheet('Sheet1')
-data = sales.get_all_values()
-
-
-print(data)
-
-"""
-"""
-def get_user_data():
-    print ("please answer the following questions")
-    weight = float(input("Enter your current weight (in kg): "))
-    height = float(input("Enter your height (in cm): "))
-    age = int(input("Enter your age: "))
-    desired_weight = float(input("Enter your desired weight (in kg): "))
-
-
-
-"""
-
-
-
-#get_user_data()
-
-"""
-
-def update_data_sheet(data):
-
-    print("updating worksheet")
-    user_worksheet = SHEET.worksheet("Sheet1")
-    user_worksheet.append_row(data)
-
-
-
-
-data= get_user_data()
-user_data = data
-update_data_sheet(data)
-
-
-update_data_sheet(data)
-"""
-
-
-
-def get_user_data():
-    """
-    Get sales figures input from the user.
-    Run a while loop to collect a valid string of data from the user
-    via the terminal, which must be a string of 6 numbers separated
-    by commas. The loop will repeatedly request data, until it is valid.
-    """
-    while True:
-        print ("WELCOME TO 1000 SUNNY FITNESS\n please answer the following questions WESH\n")
-        weight = float(input("Enter your current weight (in kg): \n"))
-        height = float(input("Enter your height (in cm):\n "))
-        age = int(input("Enter your age: "))
-        desired_weight = float(input("Enter your desired weight (in kg): \n"))
-
-        #data_str = input("Enter your data here: ")
-
-        user_data = (weight,height,age,desired_weight)
-
-        if validate_data(user_data):
-            print("Data is valid!")
-            break
-
-    return user_data
-
-
+# USE THIS TO VALIDATE DATA #
 def validate_data(values):
     """
     Inside the try, converts all string values into integers.
@@ -247,24 +118,24 @@ def validate_data(values):
     return True
 
 
-def update_sales_worksheet(data):
-    """
-    Update sales worksheet, add new row with the list data provided
-    """
-    print("Updating sales worksheet...\n")
-    sales_worksheet = SHEET.worksheet("Sheet1")
-    sales_worksheet.append_row(data)
-    print("Sales worksheet updated successfully.\n")
 
 
 
-def main():
-    data = get_user_data()
-    user_data = [int(num) for num in data]
-    update_sales_worksheet(user_data)
+# DECLARE GLOBAL VARIABLES HERE?? #
+ #user_data = (weight,height,age,desired_weight)
+ # maybe define user ddata and weight in another fucntion that does ask the user anything in the terminal 
+
+
+
+
+def main ():
+    draw_jolly_roger()
     weight_change()
+    stored_user_data()
+   
+    
+  
+    
 
 
 main()
-
-
