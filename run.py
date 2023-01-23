@@ -3,6 +3,8 @@ from google.oauth2.service_account import Credentials
 from pprint import pprint
 from math import ceil
 
+
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -16,6 +18,9 @@ SHEET = GSPREAD_CLIENT.open('1000_sunny_fitness')
 
 # Pirate flag #
 def draw_jolly_roger():
+    """
+    draws pirate flag
+    """
     print("WELCOME TO THE 1000 SUNNY")
     jolly_roger =  '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
     jolly_roger += '|                     ______                     |\n'
@@ -39,6 +44,9 @@ def draw_jolly_roger():
 
 #1
 def weight_loss_time(weight, desired_weight,age,height):
+    """"
+    calculates users weight loss projection
+    """
     weight_loss_rate = weight - desired_weight
     deficit_needed = weight_loss_rate * 7700
     recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
@@ -51,6 +59,9 @@ def weight_loss_time(weight, desired_weight,age,height):
 #2
 
 def weight_gain_time(weight, height, age, desired_weight):
+    """
+    calculates ursers weigh gain projection
+    """
     # this is the bmr for weight loss 
     BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
     weight_gain_time = BMR * 1.55
@@ -90,6 +101,9 @@ def weight_change():
         else:
             print("Invalid response, please enter either 'lose' or 'gain'")
 
+
+# is this function storing user data in the spread sheet. ?# 
+# NOOOOOOO #
 def stored_user_data():
     weight, age , height,desired_weight = weight_change()
     user_data = (weight,height,age,desired_weight)
@@ -131,11 +145,31 @@ def validate_data(values):
 def main ():
     draw_jolly_roger()
     weight_change()
-    stored_user_data()
+    #stored_user_data()
+
+            
    
+
     
-  
+  # NOTE #
+  # still need to figure out how to change color of text in terminal#
     
 
 
-main()
+#main()
+
+
+## new code janvier 23 2023 ##
+def exercise_suggestions():
+    exercise_type = input("What type of exercises qre you into?? (cardio, strength, yoga) ")
+    if exercise_type.lower() == "cardio":
+        print("Try going for a run , boxingn or some type of martial arts.")
+    elif exercise_type.lower() == "strength":
+        print("Try lifting weights at the gym")
+    elif exercise_type.lower() == "yoga":
+        print("Try a yoga class, doing a yoga video at home, or going for a yoga hike.")
+    else:
+        print("Sorry, I don't understand your input.")
+
+exercise_suggestions()
+

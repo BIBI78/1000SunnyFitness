@@ -1,3 +1,8 @@
+import sys
+import time
+
+
+# Pirate flag #
 def draw_jolly_roger():
     print("WELCOME TO THE 1000 SUNNY")
     jolly_roger =  '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
@@ -19,4 +24,9 @@ def draw_jolly_roger():
     jolly_roger += '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
     print(jolly_roger)
 
+
+
+
 draw_jolly_roger()
+
+ 
