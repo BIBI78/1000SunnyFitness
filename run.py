@@ -169,7 +169,7 @@ def exercise_suggestions():
     elif exercise_type.lower() == "yoga":
         print("Try a yoga class, doing a yoga video at home, or going for a yoga hike.")
     else:
-        print("Sorry, I don't understand your input.")
+        print("SORRY   enter something that makes sense wesh.")
 
 exercise_suggestions()
 
