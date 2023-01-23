@@ -158,7 +158,7 @@ def main ():
 
 #main()
 
-
+# 5 
 ## new code janvier 23 2023 ##
 def exercise_suggestions():
     exercise_type = input("What type of exercises qre you into?? (cardio, strength, yoga) ")
@@ -171,5 +171,14 @@ def exercise_suggestions():
     else:
         print("SORRY   enter something that makes sense wesh.")
 
-exercise_suggestions()
+# exercise_suggestions()
+# I should get a value here anc store it somehwer# 
+
+
+### I want to take all this data and return a weekly schedlue#
+
+# function 6
+#workout_plan()
+#workout_schedule()
+
 
