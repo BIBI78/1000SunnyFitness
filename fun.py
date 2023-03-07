@@ -2,7 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 from pprint import pprint
 from math import ceil
-
+#this is the most develloped code , most up to date*
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
