@@ -54,8 +54,8 @@ def weight_change(user_info):
             if weight <= 0:
                 raise ValueError("Nobody is that light,weeight must be greater than 0.")
             break
-        except ValueError as e:
-            print(f"We need a number, try again.")
+        except ValueError:
+         print("We need a number, try again.")
 
     while True:
         try:
@@ -63,8 +63,8 @@ def weight_change(user_info):
             if height <= 0:
                 raise ValueError("Height must be greater than 0.")
             break
-        except ValueError as e:
-            print(f"Huh? Height must be greater than 0.")
+        except ValueError:
+            print("Huh? Height must be greater than 0.")
 
     age = int(user_info["age"])
 
@@ -76,8 +76,8 @@ def weight_change(user_info):
             if weight_change == "gain" and desired_weight <= weight:
                 raise ValueError("Desired weight must be greater than current weight.")
             break
-        except ValueError as e:
-            print(f"Invalid input, please enter a number")
+        except ValueError:
+              print("Invalid input, please enter a number")
 
     if weight_change == "lose":
         weight_loss_rate = weight - desired_weight
