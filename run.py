@@ -42,3 +42,38 @@ def draw_jolly_roger():
     jolly_roger += '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
     print(jolly_roger)
 
+#WEIGHT FUNCTIONS
+# Weight loss function , this calculates the days needed for the user to lose weight.
+def weight_loss_time(weight, desired_weight,age,height):
+    weight_loss_rate = weight - desired_weight
+    deficit_needed = weight_loss_rate * 7700
+    recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
+    deficit_per_day = recomended_deficit 
+    days_needed = deficit_needed / deficit_per_day
+    recomended_deficit = (10*(weight) + 6.25*(height) -(5*age)+5)
+    deficit_needed = recomended_deficit
+    return days_needed 
+
+#Weight gain function , this calculates the days needed for the user to gain weight.
+def weight_gain_time(weight, height, age, desired_weight):
+    # this is the bmr for weight loss 
+    BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
+    weight_gain_time = BMR * 1.55
+    time_to_reach_desired_weight = (desired_weight - weight) / 0.5
+    return weight_gain_time, time_to_reach_desired_weight
+
+#
+
+
+
+
+
+
+
+
+
+def main():
+    draw_jolly_roger()
+    
+
+main()
