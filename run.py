@@ -83,6 +83,9 @@ def get_user_info():
     while True:
         age = input("How old are you?\n")
         if age.isnumeric() and int(age) > 0:
+            if int(age) > 150:
+                print("This app is for humans, please enter a human age.")
+                continue
             break
         print("Sorry matey lets get your age again.")
     # do i even need this really ?
@@ -96,28 +99,30 @@ def get_user_info():
     while True:
         try:
             weight = float(input("Enter your current weight in kg: "))
-            if weight <= 0:
-                raise ValueError("Nobody is that light, weight must be greater than 0.")
+            if weight <= 0 or weight > 635:
+                print("This app is for humans, please enter a human weight.")
+                continue
             break
         except ValueError:
             print("We need a number, try again.")
-
     while True:
         try:
             desired_weight = float(input("Enter your desired weight in kg: ")) if weight_change == "lose" else float(input("Enter the weight you'd like to build up to (in kg): "))
-            if desired_weight <= 0:
-                raise ValueError("Desired weight must be greater than 0.")
+            if desired_weight <= 0 or desired_weight > 635:
+                print("This app is for humans, please enter a human weight.")
+                continue
             if weight_change == "gain" and desired_weight <= weight:
                 raise ValueError("Desired weight must be greater than current weight.")
             break
         except ValueError:
             print("Invalid input, please enter a number")
-    
+   
     while True:
         try:
             height = float(input("Enter your height in cm: "))
-            if height <= 0:
-                raise ValueError("Height must be greater than 0.")
+            if height <= 0 or height > 251:
+                print("This app is for humans, please enter a human height.")
+                continue
             break
         except ValueError:
             print("Invalid input, please enter a number")
