@@ -47,7 +47,9 @@ def draw_jolly_roger():
 # So this new function combines weight loss and and weight gain. 
 # this function takes the user data provided earlier and does  the necessary calculations for weight loss or gain
 # new weight change test function - KG bs 
+# add upper and lower bounds to numeric user info
 def weight_change(user_info):
+    # here im just take the weight change key from the user info dictionary , and the same for the rest.
     weight_change = user_info["weight_change"]
     current_weight = user_info["weight"]
     desired_weight = user_info["desired_weight"]
@@ -77,7 +79,7 @@ def weight_change(user_info):
 
 
 #USER INFO
-def get_user_info():
+def basic_user_info():
     print("WELCOME TO 1000 SUNNY FITNESS \n")
     name = input("What's your name?\n")
     while True:
@@ -132,12 +134,50 @@ def get_user_info():
    
 
     return user_info
-
+#workout info
+def suggest_workout_plan():
+    # this is where i create an empty list for exercises 
+    exercises = []
+    # also a list  of options 
+    options = ["cardio", "weight lifting", "home workout"]
+    # this is my loop , asking the user to choose exercises up to 3, because thats how many i have in the options 
+    while len(exercises) < 3:
+        exercise = input("What exercises would you like to do? (Enter one or more, separated by commas): cardio, weight lifting, home workout\n")
+        # I use the split fucntion  to split the list by commas
+        for choice in exercise.split(','):
+            choice = choice.strip().lower()
+            if choice in options:
+                if choice not in exercises:
+                    # this is me add thier choice to the empty list options 
+                    exercises.append(choice)
+                    if len(exercises) == 3:
+                        break
+            else:
+                print("Sorry please choose from the options: cardio, weight lifting, home workout.")
+        if len(exercises) < 3:
+            # this more_exercises idea is not mine
+            more_exercises = input("Would you like to add any other exercises? (yes or no)\n")
+            if more_exercises.lower() == "no":
+                break
+            elif more_exercises.lower() == "yes":
+                print("Here are the remaining exercises you can still choose from: ")
+                for option in options:
+                    if option not in exercises:
+                        print(option)
+                continue
+            else:
+                print("Please enter 'yes' or 'no'.")
+                continue
+    if len(exercises) == 3:
+        # aight
+        print("You have chosen all 3.")
+    print(f" This is what you have chosen: {', '.join(exercises)}")
+    return exercises
 
 
 def main():
     draw_jolly_roger()
-    user_info = get_user_info()
+    user_info = basic_user_info()
     weight_change(user_info)
 
 main()
