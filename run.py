@@ -79,6 +79,7 @@ def weight_change(user_info):
 
 
 #USER INFO
+
 def ask_user_info():
     print("WELCOME TO 1000 SUNNY FITNESS \n")
     name = input("What's your name?\n")
@@ -114,13 +115,14 @@ def ask_user_info():
                 print("This app is for humans, please enter a human weight.")
                 continue
             if weight_change == "gain" and desired_weight <= weight:
-                raise ValueError("Desired weight gotta be greater than current weight.")
+                raise ValueError("Desired weight gotta be greater than current weight")
             elif weight_change == "lose" and desired_weight >= weight:
                 raise ValueError("Desired weight gotta be less than current weight")
             break
-        except ValueError:
-            print("Invalid input, please enter a number")
-    
+        # this (e) i dont quite understand , got it from a forum , need it to remedy problem with except value eerrors
+        except ValueError as e:
+            print(e)
+
     while True:
         try:
             height = float(input("Enter your height in cm: "))
@@ -134,8 +136,10 @@ def ask_user_info():
     user_info = {"name": name, "age": age, "gender": gender, "weight_change": weight_change, "weight": weight, "desired_weight": desired_weight, "height": height}
 
    
-
     return user_info
+
+
+   
 #workout info
 # 1
 # this function suggestion 3 workout types( cardio , weights ,home)
