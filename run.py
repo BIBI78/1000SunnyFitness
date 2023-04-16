@@ -89,14 +89,13 @@ def ask_user_info():
                 print("This app is for humans, please enter a human age.")
                 continue
             break
-        print("Sorry matey lets get your age again.")
-    # do i even need this really ?
-    gender = input("What gender do you identify as?\n") 
+        print("Sorry matey, let's get your age again.")
+    gender = input("What gender do you identify as?\n")
     while True:
         weight_change = input("Would you like to lose or gain weight? (lose or gain): ")
         if weight_change == "lose" or weight_change == "gain":
             break
-        print("That doesnt work, please enter either 'lose' or 'gain'")
+        print("That doesn't work, please enter either 'lose' or 'gain'")
 
     while True:
         try:
@@ -107,6 +106,7 @@ def ask_user_info():
             break
         except ValueError:
             print("We need a number, try again.")
+
     while True:
         try:
             desired_weight = float(input("Enter your desired weight in kg: ")) if weight_change == "lose" else float(input("Enter the weight you'd like to build up to (in kg): "))
@@ -114,11 +114,13 @@ def ask_user_info():
                 print("This app is for humans, please enter a human weight.")
                 continue
             if weight_change == "gain" and desired_weight <= weight:
-                raise ValueError("Desired weight must be greater than current weight.")
+                raise ValueError("Desired weight gotta be greater than current weight.")
+            elif weight_change == "lose" and desired_weight >= weight:
+                raise ValueError("Desired weight gotta be less than current weight")
             break
         except ValueError:
             print("Invalid input, please enter a number")
-   
+    
     while True:
         try:
             height = float(input("Enter your height in cm: "))
@@ -131,18 +133,7 @@ def ask_user_info():
 
     user_info = {"name": name, "age": age, "gender": gender, "weight_change": weight_change, "weight": weight, "desired_weight": desired_weight, "height": height}
 
-    while True:
-        workout_plan = input("Would you like a workout plan? (yes or no): ")
-        if workout_plan.lower() == "yes":
-            user_info["workout_plan"] = suggest_workout_plan()
-            workout_types = user_info["workout_plan"]
-            ###
-            ####
-            break
-        elif workout_plan.lower() == "no":
-            break
-        else:
-            print("Please enter 'yes' or 'no'.")
+   
 
     return user_info
 #workout info
