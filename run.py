@@ -79,7 +79,7 @@ def weight_change(user_info):
 
 
 #USER INFO
-def basic_user_info():
+def ask_user_info():
     print("WELCOME TO 1000 SUNNY FITNESS \n")
     name = input("What's your name?\n")
     while True:
@@ -201,7 +201,7 @@ def suggest_workout_options():
 
 def main():
     draw_jolly_roger()
-    user_info = basic_user_info()
+    user_info = ask_user_info()
     weight_change(user_info)
 
 main()
