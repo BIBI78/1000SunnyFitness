@@ -74,7 +74,7 @@ def weight_change(user_info):
         user_data = (current_weight, height, age, desired_weight)
         # potential new code
     return user_data
-
+# need to add ACTIVITY FACTOR 
 
 
 
