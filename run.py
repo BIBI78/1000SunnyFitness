@@ -135,7 +135,20 @@ def ask_user_info():
 
     user_info = {"name": name, "age": age, "gender": gender, "weight_change": weight_change, "weight": weight, "desired_weight": desired_weight, "height": height}
 
-   
+    while True:
+        workout_plan = input("Would you like a workout plan? (yes or no): ")
+        if workout_plan.lower() == "yes":
+            user_info["workout_plan"] = suggest_workout_plan()
+           ####
+           ####
+           ####
+           #### space for more code
+            break
+        elif workout_plan.lower() == "no":
+            break
+        else:
+            print("Please enter 'yes' or 'no'.")
+
     return user_info
 
 
@@ -191,12 +204,36 @@ def suggest_workout_options():
         "weight lifting": ["bench press", "dumbbell press", "dead lift", "leg press", "squat", "pull up"],
         "home workout": ["push ups", "sit ups", "squats", "jump rope", "crunches", "v ups"]
     }
+    # empty list with the users chosen options 
+    chosen_options = []
+    # for loop on the argument ??? each type in workout ???
+    for workout_type in workout_types:
+        # print and ask user which workouts and their number 
+        print(f"Which {workout_type} exercises would you like to include in your workout? (enter numbers separated by commas please)")
+        exercises = options[workout_type]
+        # this part is not mine, got help from a friend, try to rewrite this in my own way.!!!
+        for i, exercise in enumerate(exercises):
+            # pirnting numbered list
+            print(f"{i + 1}. {exercise}")
+            #user input
+        chosen = input()
+        chosen_exercises = []
+        #validates user input, makes sure the users input is seperated commas and only takes in integers 
+        # this validation process is probaly more complicated that it needs to be
+        while not chosen.replace(',', '').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(exercises) or min([int(num) for num in chosen.split(",")]) < 1:
+            print("Invalid input. Please enter the numbers of the exercises you would like to include (comma-separated please!!!).")
+            for i, exercise in enumerate(exercises):
+                print(f"{i + 1}. {exercise}")
+            chosen = input()
+        chosen_exercises = [exercises[int(num) - 1] for num in chosen.split(",")]
+        chosen_options.append(chosen_exercises)
+    return chosen_options
+
     
-    return 
 #3
 def suggest_weekly_schedule():
  print("blablbahb")
- 
+
 
 def main():
     draw_jolly_roger()
