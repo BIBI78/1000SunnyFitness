@@ -146,6 +146,7 @@ def basic_user_info():
 
     return user_info
 #workout info
+# 1
 # this function suggestion 3 workout types( cardio , weights ,home)
 def suggest_workout_plan():
     # this is where i create an empty list for exercises 
@@ -185,7 +186,18 @@ def suggest_workout_plan():
         print("You have chosen all 3.")
     print(f" This is what you have chosen: {', '.join(exercises)}")
     return exercises
-
+#2
+#workout options , create dictionary 
+def suggest_workout_options():
+    # need to pass an argument , this is just the workout options options ?
+    # options is a dictionary mapping each workout type to a list of exercises 
+    options = {
+        "cardio": ["hiking", "long distance running", "boxing", "walking"],
+        "weight lifting": ["bench press", "dumbbell press", "dead lift", "leg press", "squat", "pull up"],
+        "home workout": ["push ups", "sit ups", "squats", "jump rope", "crunches", "v ups"]
+    }
+    
+    return 
 
 def main():
     draw_jolly_roger()
