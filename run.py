@@ -193,6 +193,10 @@ def suggest_workout_options():
     }
     
     return 
+#3
+def suggest_weekly_schedule():
+ print("blablbahb")
+ 
 
 def main():
     draw_jolly_roger()
