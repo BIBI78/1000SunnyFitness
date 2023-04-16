@@ -120,6 +120,7 @@ def ask_user_info():
                 raise ValueError("Desired weight gotta be less than current weight")
             break
         # this (e) i dont quite understand , got it from a forum , need it to remedy problem with except value eerrors
+        # and the wieght loss mess 
         except ValueError as e:
             print(e)
 
@@ -131,7 +132,7 @@ def ask_user_info():
                 continue
             break
         except ValueError:
-            print("Invalid input, please enter a number")
+            print("Please enter a number!")
 
     user_info = {"name": name, "age": age, "gender": gender, "weight_change": weight_change, "weight": weight, "desired_weight": desired_weight, "height": height}
 
@@ -139,7 +140,14 @@ def ask_user_info():
         workout_plan = input("Would you like a workout plan? (yes or no): ")
         if workout_plan.lower() == "yes":
             user_info["workout_plan"] = suggest_workout_plan()
-           ####
+            #here im getting the workout info from the user info and assigning it
+            workout_types = user_info["workout_plan"]
+            ## this part is complicated // DICTIONARY
+            # here im creating a dictionary where the keys are the workout types 
+            # and the values are the suggested workout optionns:
+            # "type" is the key and and suggest_workout_options()[type][#] is the "value"
+            #suggest_workout_options takes "workout_type" as an argument then returns a list at whatever index [#]
+            options = {type: suggest_workout_options([type])[0] for type in workout_types}
            ####
            ####
            #### space for more code
@@ -196,7 +204,7 @@ def suggest_workout_plan():
     return exercises
 #2
 #workout options , create dictionary 
-def suggest_workout_options():
+def suggest_workout_options(workout_types):
     # need to pass an argument , this is just the workout options options ?
     # options is a dictionary mapping each workout type to a list of exercises 
     options = {
@@ -221,7 +229,7 @@ def suggest_workout_options():
         #validates user input, makes sure the users input is seperated commas and only takes in integers 
         # this validation process is probaly more complicated that it needs to be
         while not chosen.replace(',', '').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(exercises) or min([int(num) for num in chosen.split(",")]) < 1:
-            print("Invalid input. Please enter the numbers of the exercises you would like to include (comma-separated please!!!).")
+            print("Please enter the numbers of the exercises you would like to include (comma-separated please!!!).")
             for i, exercise in enumerate(exercises):
                 print(f"{i + 1}. {exercise}")
             chosen = input()
