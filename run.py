@@ -131,10 +131,22 @@ def basic_user_info():
 
     user_info = {"name": name, "age": age, "gender": gender, "weight_change": weight_change, "weight": weight, "desired_weight": desired_weight, "height": height}
 
-   
+    while True:
+        workout_plan = input("Would you like a workout plan? (yes or no): ")
+        if workout_plan.lower() == "yes":
+            user_info["workout_plan"] = suggest_workout_plan()
+            workout_types = user_info["workout_plan"]
+            ###
+            ####
+            break
+        elif workout_plan.lower() == "no":
+            break
+        else:
+            print("Please enter 'yes' or 'no'.")
 
     return user_info
 #workout info
+# this function suggestion 3 workout types( cardio , weights ,home)
 def suggest_workout_plan():
     # this is where i create an empty list for exercises 
     exercises = []
