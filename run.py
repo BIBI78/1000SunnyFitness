@@ -239,8 +239,19 @@ def suggest_workout_options(workout_types):
 
     
 #3
+# This function is supposed to generate a scheudle based on the users input
 def suggest_weekly_schedule():
- print("blablbahb")
+ days_of_the_week["Monday," "Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+ workout_days = input("How many days a week would you wanna workout (enter a number 1-7\n )")
+ # this is  a loop to make sure user input is valid
+while workout_days.isdigit() == False or int(workout_days) < 1 or int(work_out) > 7:
+    workout_days = input("That doesnt work, how many days would you like to workout a week? (eneter a number 1-7\n )")
+# int , converts stirng to an integer, a number
+workout_days=int(workout_days)
+
+
+
+
 
 
 def main():
