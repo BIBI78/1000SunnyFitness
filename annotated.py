@@ -249,29 +249,12 @@ while workout_days.isdigit() == False or int(workout_days) < 1 or int(work_out) 
     workout_days = input("That doesnt work, how many days would you like to workout a week? (eneter a number 1-7\n )")
 # int , converts stirng to an integer, a number
 workout_days=int(workout_days)
+
 # this is a list that takes all the values listed in the "options" dictionary
 all_exercises = []
 for exercise_list in options.values():
     # extend to add each exo list to the all exo list
     all_exercises.extend(exercise_list)
-#Here im generating a random schedule by randomly selecting values from all_exercises list for the days of the week
-weekly_schedule = {}
-for day in days_of_the_week:
-    if workout_days == 0:
-        break
-    #shuffle shuffles the list before i use sample 
-    random.shuffle(all_exercises)
-    #1,..? len
-    # this is slightly more complicated.
-    # sample takes a set form the list then join adds it to a string
-    # the string is then stored in the weekly_schedule dictionary with the day of the week as its key.
-    workout_plan = ",".join(random.sample(all_exercises,randint(1,len(all_exercises))))
-    weekly.schedule[day] = workout_plan
-    workout_days -= 1
-print("Here is a weekly workout schedule:\n")
-for day , plan in weekly_schedule.items():
-    print(f"{day}: {plan}")
-return weekly_schedule
 
 
 
