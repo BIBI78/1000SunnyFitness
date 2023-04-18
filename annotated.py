@@ -4,6 +4,7 @@ from pprint import pprint
 import requests
 import json
 import random
+from random import randint
 import time 
 from math import ceil
 
@@ -148,6 +149,7 @@ def ask_user_info():
             # "type" is the key and and suggest_workout_options()[type][#] is the "value"
             #suggest_workout_options takes "workout_type" as an argument then returns a list at whatever index [#]
             options = {type: suggest_workout_options([type])[0] for type in workout_types}
+            user_info["weekly_schedule"] = suggest_weekly_schedule(options) 
            ####
            ####
            #### space for more code
@@ -241,9 +243,6 @@ def suggest_workout_options(workout_types):
 #3
 # This function is supposed to generate a scheudle based on the users input
 # Takes the arguments "options"
-import random
-from random import randint
-
 def suggest_weekly_schedule(options):
     days_of_the_week = ["Monday", "Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
     workout_days = input("How many days a week would you wanna workout (enter a number 1-7\n )")
@@ -282,3 +281,11 @@ def suggest_weekly_schedule(options):
         print(f"{day}: {plan}")
         
     return weekly_schedule
+
+
+def main():
+    draw_jolly_roger()
+    user_info = ask_user_info()
+    weight_change(user_info)
+
+main()
