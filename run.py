@@ -327,11 +327,46 @@ def suggest_meal_plan():
     print (f" this is what you have decided on: {','.join(meals)}")
     return meals
                 
+#2
+#Here im gonna suggest meal options / types , in greater detail
+# ca bug 
+def suggest_meal_options(meal_types):
+
+    options = {
+    "vegetarian": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
+    "gluten-free": ["brown rice", "buckwheat", "potatoes", "sweet potatoes", "quinoa", "almonds", "salmon"],
+    "halal": ["chicken", "beef", "lamb", "fish", "eggs", "beans", "nuts"],
+    "any": ["chicken", "salmon", "eggs", "broccoli", "brown rice", "quinoa", "avocado"]
+    }
+
+    chosen_options = []
+    #loop on argument
+    for meal_type in meal_types:
+        print(f"Which {meal_type} meal type would you like (enter number seperated by comma please)")
+        meals = options[meal_type]
+        for i, meal in enumerate(meals):
+            # pint numbered list
+            print(f"{i+1}.{exercise}")
+            #user input
+        chosen = input()
+        chosen_exercises = []
+        #  validate user input
+        while not chosen.replace(',','').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(meals) or min([int(num) for num in chosen.split(",")]) < 1 :
+            print("Inavllid input. Please enter the numbers of the meals you would like to include (comma-separated please!!!).")
+            for i , meal in enumerate(meals):
+                print(f"{i +1}.{meal}")
+            chosen = input()
+        chosen_meals =  [meal[int(num) - 1] for num in chosen.split(",")]
+        chosen_options.append(chosen_meals)
+    return chosen_options
+
+
 
 
 def main():
     draw_jolly_roger()
     user_info = ask_user_info()
     weight_change(user_info)
+    #daily_meal_plan = suggest_meal_plan(meal_options)
 
 main()
