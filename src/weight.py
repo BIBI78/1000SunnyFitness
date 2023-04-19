@@ -181,5 +181,7 @@ def ask_user_info():
             break
         else:
             print("Sorry, I didn't catch that.")
-    
+            
+    #print("User info:", user_info)
+
     return user_info
