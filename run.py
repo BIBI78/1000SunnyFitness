@@ -283,6 +283,52 @@ def suggest_weekly_schedule(options):
     return weekly_schedule
 
 
+
+#DIET // MEAL PLAN
+# suggest meal plan 
+# so basically this should be a copy paste of workout 
+# i should suggest 3 meal plans , vegetarien , gluton free , and whatver with meat etc 
+#1
+
+def suggest_meal_plan():
+    meals = []
+    options = ["Vegan","Gluton Free","Whatever","Halal"]
+    # gonna loop and ask the user what they would like to eat
+    while len(meals) < 4:
+        meal = input("What kind of meals would you like ?(Enter one or more, separated by commas): Vegetarien, Gluton Free, Halal,Whatvever \n")
+        # split by commas
+        for choice in meal.split(','):
+            # strip to strip the white space
+            choice = choice.strip().lower()
+            if choice in options:
+                if choice not in meals:
+                    # add choice to empty list
+                    meals.append(choice)
+                    if len(meals) == 4:
+                        break
+            else:
+                print("Sorry please choose from the options: Vegetarien, Gluton Free, Halal,Whatvever \n")
+        if len(meals) < 4:
+            #bout to do something complicated
+            more_meals = input("Would you like to add anything else? (yes or no)\n")
+            if more_meals.lower() == "no":
+                break
+            elif more_meals.lower() == "yes":
+                print("Here are the remaining meals you can still choose from:")
+                for option in options:
+                    if option not in meals:
+                        print(option)
+                continue
+            else:
+                print("Please enter yes or no")
+                continue
+    if len(meals) == 4:
+        print("You have chosen everything.")
+    print (f" this is what you have decided on: {','.join(meals)}")
+    return meals
+                
+
+
 def main():
     draw_jolly_roger()
     user_info = ask_user_info()
