@@ -156,6 +156,8 @@ def ask_user_info():
     else:
         print("Invalid input. Please enter yes or no.")
 
+    return user_info
+
        
 
 
