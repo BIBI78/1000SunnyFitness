@@ -272,7 +272,6 @@ def suggest_weekly_schedule(options):
 # i should suggest 3 meal plans , vegetarien , gluton free , and whatver with meat etc 
 #1
 #def suggest_meal_plan():
-
 def suggest_meal_plan():
     meals = []
     options = ["vegan", "gluten free", "whatever", "halal"]
@@ -354,7 +353,29 @@ def suggest_meal_options(meal_types):
         chosen_options.append(chosen_meals)
     return chosen_options
 
+#3 
+#suggest meal schudle , days and shit 
+# this is gonna be a little different 
+# this is just a sketch , 
+def suggest_weekly_meal_scheudle(options):
+    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
+    all_meals = []
+    for meal_list in options.values():
+        all_meals.extend(meal_list)
+    
+    weekly_schedule = {}
+    for day in days_of_week:
+        if meal_days == 0:
+            break
+        random.shuffle(all_meals)
+        workout_plan = ",".join(random).sample(all_meals,random.radnint(1,len(all_meals)))
+        weekly_schedule[day] = meal_plan
+        meal_days -= 1
+    print("Voila food for the week:")
+    for day, plan in weekly_schedule.items():
+        print(f"{day}: {plan}")
+    return weekly_schedule
 
 
 
