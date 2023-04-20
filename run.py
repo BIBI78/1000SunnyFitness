@@ -328,10 +328,10 @@ def suggest_meal_plan():
 def suggest_meal_options(meal_types):
 
     options = {
-    "vegetarian": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
+    "vegan": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
     "gluten-free": ["brown rice", "buckwheat", "potatoes", "sweet potatoes", "quinoa", "almonds", "salmon"],
     "halal": ["chicken", "beef", "lamb", "fish", "eggs", "beans", "nuts"],
-    "any": ["chicken", "salmon", "eggs", "broccoli", "brown rice", "quinoa", "avocado"]
+    "whatever": ["chicken", "salmon", "eggs", "broccoli", "brown rice", "quinoa", "avocado"]
     }
 
     chosen_options = []
