@@ -170,14 +170,12 @@ def ask_user_info():
 # WORKOUT SUGGESTIONS 
 # problem when i enter a comma after at exercise options
 #1
-
 def suggest_workout_plan():
     exercises = []
     options = ["cardio", "weight lifting", "home workout"]
     while len(exercises) < 3:
         exercise = input("What exercises would you like to do? (Enter one or more, separated by commas): cardio, weight lifting, home workout\n")
         
-        # Check if the input consists only of whitespace or commas
         if all(c in ", " for c in exercise):
             print("Please enter at least one exercise.")
             continue
@@ -196,23 +194,24 @@ def suggest_workout_plan():
                     break
         if len(exercises) < 3:
             more_exercises = input("Would you like to add any other exercises? (yes or no)\n")
+            while more_exercises.lower() not in ["yes", "no"]:
+                print("Please enter 'yes' or 'no'.")
+                more_exercises = input("Would you like to add any other exercises? (yes or no)\n")
             if more_exercises.lower() == "no":
                 break
             elif more_exercises.lower() == "yes":
-                print("Here are the remaining exercises you can still choose from: ")
-                for option in options:
-                    if option not in exercises:
+                remaining_exercises = [option for option in options if option not in exercises]
+                if len(remaining_exercises) > 0:
+                    print("Here are the remaining exercises you can still choose from:")
+                    for option in remaining_exercises:
                         print(option)
-                continue
-            else:
-                print("Please enter 'yes' or 'no'.")
+                else:
+                    print("You have already chosen all available exercises.")
                 continue
     if len(exercises) == 3:
         print("You have chosen all 3.")
     print(f" This is what you have chosen: {', '.join(exercises)}")
     return exercises
-
-
 
 
 #2
@@ -274,6 +273,9 @@ def suggest_weekly_schedule(options):
     for day, plan in weekly_schedule.items():
         print(f"{day}: {plan}")
     return weekly_schedule
+
+
+
 
 #DIET // MEAL PLAN
 #1
