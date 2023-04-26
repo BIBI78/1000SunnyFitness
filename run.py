@@ -150,11 +150,15 @@ def ask_user_info():
         meal_plan = input("Would you like a meal plan? (yes or no): ")
         if meal_plan.lower() == "yes":
             user_info["meal_plan"] = suggest_meal_plan()
+            meal_types = user_info["meal_plan"]
+            options = {type: suggest_meal_options([type])[0] for type in meal_types}
+            user_info["suggest_weekly_meal_schedule"] = suggest_weekly_meal_schedule(options) 
             break
         elif meal_plan.lower() == "no":
             break
-    else:
-        print("Invalid input. Please enter yes or no.")
+        else:
+            print("Please enter 'yes' or 'no'.")
+
 
     return user_info
 
@@ -164,30 +168,33 @@ def ask_user_info():
 
 
 # WORKOUT SUGGESTIONS 
+# problem when i enter a comma after at exercise options
 #1
-# I suggest exercises 
-# i should rename this function , this actually jsut suggest 3 exercise types
+
 def suggest_workout_plan():
-    # this is where i create an empty list for exercises 
     exercises = []
-    # also a list  of options 
     options = ["cardio", "weight lifting", "home workout"]
-    # this is my loop , asking the user to choose exercises up to 3, because thats how many i have in the options 
     while len(exercises) < 3:
         exercise = input("What exercises would you like to do? (Enter one or more, separated by commas): cardio, weight lifting, home workout\n")
-        # I use the split fucntion  to split the list by commas
+        
+        # Check if the input consists only of whitespace or commas
+        if all(c in ", " for c in exercise):
+            print("Please enter at least one exercise.")
+            continue
+        
         for choice in exercise.split(','):
             choice = choice.strip().lower()
-            if choice in options:
-                if choice not in exercises:
-                    # this is me add thier choice to the empty list options 
-                    exercises.append(choice)
-                    if len(exercises) == 3:
-                        break
-            else:
+            while choice not in options:
                 print("Sorry please choose from the options: cardio, weight lifting, home workout.")
+                exercise = input("What exercises would you like to do? (Enter one or more, separated by commas): cardio, weight lifting, home workout\n")
+                for choice in exercise.split(','):
+                    choice = choice.strip().lower()
+                continue
+            if choice not in exercises:
+                exercises.append(choice)
+                if len(exercises) == 3:
+                    break
         if len(exercises) < 3:
-            # this more_exercises idea is not mine
             more_exercises = input("Would you like to add any other exercises? (yes or no)\n")
             if more_exercises.lower() == "no":
                 break
@@ -201,10 +208,13 @@ def suggest_workout_plan():
                 print("Please enter 'yes' or 'no'.")
                 continue
     if len(exercises) == 3:
-        # aight
         print("You have chosen all 3.")
     print(f" This is what you have chosen: {', '.join(exercises)}")
     return exercises
+
+
+
+
 #2
 # I suggest exercise types 
 def suggest_workout_options(workout_types):
@@ -265,105 +275,95 @@ def suggest_weekly_schedule(options):
         print(f"{day}: {plan}")
     return weekly_schedule
 
-
-
-
 #DIET // MEAL PLAN
-# suggest meal plan 
-# so basically this should be a copy paste of workout 
-# i should suggest 3 meal plans , vegetarien , gluton free , and whatver with meat etc 
 #1
-#def suggest_meal_plan():
-
 def suggest_meal_plan():
     meals = []
-    options = ["vegan", "gluten free", "whatever", "halal"]
-    
-    # Ask if the user wants a meal plan
-    meal_plan = ""
-    # If the user wants a meal plan, ask for meal types
-    print("Here are the available meal plans:")
-    print("\n".join(options))
-        
-        # aask for meal types
+    options = ["vegan", "halal", "gluten free", "whatever"]
     while len(meals) < 4:
-            meal = input("What kind of meals would you like? (Enter one or more, separated by commas): ")
-            
-            # split by commas
-            for choice in meal.split(","):
-                # strip white space and make lowercase
-                choice = choice.strip().lower()
-                
-                if choice in options and choice not in meals:
-                    meals.append(choice)
-                    if len(meals) == 4:
-                        break
-                else:
-                    print("Hein?  please choose from the list of meal plans.")
-            
-            # If we haven't reached 4 meals yet, ask if the user wants to add more
-            if len(meals) < 4:
-                more_meals = input("Would you like to add anything else? (yes or no)\n")
-                if more_meals.lower() == "no":
+        meal = input("What meas would you liek to have do? (Enter one or more, separated by commas): vegan , halal, gluten free, whatever\n")
+        if all(c in ", " for c in meal):
+            print("Please enter at least one meal.")
+            continue
+        
+        for choice in meal.split(','):
+            choice = choice.strip().lower()
+            while choice not in options:
+                print("Sorry please choose from the options: vegan, halal, gluten free, whatever")
+                meal = input("What meals would you like to eat? (Enter one or more, separated by commas): vegan , halal, gluten free , whatever\n")
+                for choice in meal.split(','):
+                    choice = choice.strip().lower()
+                continue
+            if choice not in meals:
+                meals.append(choice)
+                if len(meals) == 4:
                     break
-                elif more_meals.lower() == "yes":
-                    print("Heres whats left for the  meal plans you can still add:")
-                    for option in options:
-                        if option not in meals:
-                            print(option)
-                    continue
-                else:
-                    print("Please enter yes or no")
-                    continue
-    
-        # Print the chosen meals
-            if len(meals) == 4:
-                 print("Ok so everything.")
-                 print(f"This is what you decided on: {', '.join(meals)}")
-    
+        if len(meals) < 4:
+            more_meals = input("Would you like to add any other meals? (yes or no)\n")
+            if more_meals.lower() == "no":
+                break
+            elif more_meals.lower() == "yes":
+                print("Here are the remaining meals you can still choose from: ")
+                for option in options:
+                    if option not in meals:
+                        print(option)
+                continue
+            else:
+                print("Please enter 'yes' or 'no'.")
+                continue
+    if len(meals) == 4:
+        print("You have chosen all 4.")
+    print(f" This is what you have chosen: {', '.join(meals)}")
     return meals
+
 
 #2 suggest meal types
 #Here im gonna suggest meal options / types , in greater detail
 def suggest_meal_options(meal_types):
 
     options = {
-    "vegan": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
-    "gluten-free": ["brown rice", "buckwheat", "potatoes", "sweet potatoes", "quinoa", "almonds", "salmon"],
-    "halal": ["chicken", "beef", "lamb", "fish", "eggs", "beans", "nuts"],
-    "whatever": ["chicken", "salmon", "eggs", "broccoli", "brown rice", "quinoa", "avocado"]
+        "vegan": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
+        "gluten-free": ["brown rice", "buckwheat", "potatoes", "sweet potatoes", "quinoa", "almonds", "salmon"],
+        "halal": ["chicken", "beef", "lamb", "fish", "eggs", "beans", "nuts"],
+        "whatever": ["chicken", "salmon", "eggs", "broccoli", "brown rice", "quinoa", "avocado"]
     }
 
     chosen_options = []
-    #loop on argument
     for meal_type in meal_types:
-        print(f"Which {meal_type} meal type would you like (enter number seperated by comma please)")
+        print(f"Which {meal_type} meal type would you like (enter number separated by comma please)")
         meals = options[meal_type]
         for i, meal in enumerate(meals):
-            # pint numbered list
-            print(f"{i+1}.{exercise}")
-            #user input
+            print(f"{i+1}.{meal}")
+        
         chosen = input()
-        chosen_exercises = []
-        #  validate user input
+        chosen_meals = []
+        
         while not chosen.replace(',','').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(meals) or min([int(num) for num in chosen.split(",")]) < 1 :
-            print("Inavllid input. Please enter the numbers of the meals you would like to include (comma-separated please!!!).")
-            for i , meal in enumerate(meals):
-                print(f"{i +1}.{meal}")
+            print("Invalid input. Please enter the numbers of the meals you would like to include (comma-separated please!!!).")
             chosen = input()
-        chosen_meals =  [meal[int(num) - 1] for num in chosen.split(",")]
+            
+        if chosen:
+            chosen_meals = [meals[int(num) - 1] for num in chosen.split(",")]
+            print("Here are the available meal options:")
+            print(", ".join(chosen_meals))
+        
         chosen_options.append(chosen_meals)
+        
     return chosen_options
+
 
 
 #3 
 #suggest meal schudle , days and shit 
 # this is gonna be a little different 
-#3 
-#suggest meal schedule, days and shit 
-# this is gonna be a little different 
-def suggest_weekly_meal_scheudle(options):
+def suggest_weekly_meal_schedule(options):
     days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    meal_days = input("How many days a week would you like to a meal plan? (1-7)\n")
+    while meal_days.isdigit() == False or int(meal_days) < 1 or int(meal_days) > 7:
+        meal_days = input("Invalid input. How many days a week would you like a food plan? (1-7)\n")
+    meal_days = int(meal_days)
+
+
 
     all_meals = []
     for meal_list in options.values():
@@ -386,6 +386,44 @@ def suggest_weekly_meal_scheudle(options):
 
 
 
+#### ACTIVITY FACTOR
+def calculate_activity_factor(user_info):
+    #we extract data from the user info 
+    # so whats the problem 
+    weight_change = user_info["weight_change"]
+    weight = user_info["weight"]
+    desired_weight = user_info["desired_weight"]
+    height = user_info["height"]
+    age = int(user_info["age"])
+   
+
+    bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5
+
+    if weight_change == "lose":
+        
+        daily_caloric_intake = bmr * 0.8
+
+
+    else:
+        daily_caloric_intake = bmr * 1.2
+
+    if desired_weight > weight:
+        weight_change_factor = 1
+    elif desired_weight == weight:
+        weight_change_factor = 0
+    else:
+        weight_change_factor = -1
+
+    activity_factor = (daily_caloric_intake + (weight_change_factor * 500)) / bmr
+
+    blah= (("this is your recommned caloric intake lil bro a day with the  AF :"), ceil( activity_factor * daily_caloric_intake))
+    print(blah)
+
+    return activity_factor
+
+
+
+
 
 
 ##### MAIN #####
@@ -393,6 +431,8 @@ def main():
     draw_jolly_roger()
     user_info = ask_user_info()
     weight_change(user_info)
+    #re ecrire sk8.py, envleve les fotions on a pas besoin 
+    calculate_activity_factor(user_info)
     
 
     
