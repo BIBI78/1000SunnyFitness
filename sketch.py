@@ -40,8 +40,6 @@ def weight_change(user_info):
     return user_data 
 
 #USER INFO
-# I have editted this function over and over 
-#This should prompt the user to re-enter their information if they input an age over 150, a height over 251 cm, or a weight over 635 kg.
 def ask_user_info():
     print("WELCOME TO 1000 SUNNY FITNESS \n")
     name = input("What's your name?\n")
@@ -106,7 +104,7 @@ def ask_user_info():
             user_info["workout_plan"] = suggest_workout_plan()
             workout_types = user_info["workout_plan"]
             options = {type: suggest_workout_options([type])[0] for type in workout_types}
-            user_info["weekly_schedule"] = suggest_weekly_schedule(options) 
+            user_info["weekly_schedule"] = suggest_weekly_schedule(options,user_info) 
             break
         elif workout_plan.lower() == "no":
             break
@@ -199,7 +197,8 @@ def suggest_workout_options(workout_types):
 
 #3
 # I suggest a weekly scheudle 
-def suggest_weekly_schedule(options):
+
+def suggest_weekly_schedule(options, user_info):
     days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     workout_days_str = input("How many days a week would you like to work out? (1-7)\n")
     while workout_days_str.isdigit() == False or int(workout_days_str) < 1 or int(workout_days_str) > 7:
@@ -219,20 +218,42 @@ def suggest_weekly_schedule(options):
         workout_plan = ", ".join(random.sample(all_exercises, random.randint(1, len(all_exercises))))
         weekly_schedule[day] = workout_plan
         workout_days -= 1
+    
+    weight_change = user_info["weight_change"]
+    weight = user_info["weight"]
+    desired_weight = user_info["desired_weight"]
+    height = user_info["height"]
+    age = int(user_info["age"])
+
+    activity_coef = original_workout_days
+    bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5
+    if weight_change == "lose":
+        daily_caloric_intake = bmr * 0.8
+    else:
+        daily_caloric_intake = bmr * 1.2
+        
+    if desired_weight > weight:
+        weight_change_factor = 1
+    elif desired_weight == weight:
+        weight_change_factor = 0
+    else:
+        weight_change_factor = -1
+
+    activity_factor = (daily_caloric_intake + (weight_change_factor * 500)) / bmr
+
     print("Here's your weekly workout schedule:")
     for day, plan in weekly_schedule.items():
         print(f"{day}: {plan}")
-        
+    
+    print("You have an activity coefficient of:", activity_coef, "so you should ACTUALLY eat about", abs(ceil(activity_factor * daily_caloric_intake)- daily_caloric_intake), "more each day you workout to stay on target.")
 
-    return weekly_schedule, original_workout_days
-
-
-
+    return weekly_schedule, original_workout_days, activity_factor
 
 
-#### ACTIVITY FACTOR
-# this kinda works
-def calculate_activity_factor(user_info, suggest_weekly_schedule):
+
+
+# ACTIVITY FACTOR
+#def calculate_activity_factor(user_info, suggest_weekly_schedule):
     weight_change = user_info["weight_change"]
     weight = user_info["weight"]
     desired_weight = user_info["desired_weight"]
@@ -247,13 +268,9 @@ def calculate_activity_factor(user_info, suggest_weekly_schedule):
    # THIS IS THE ACTIVTY COEFF 
     weekly_schedule, original_workout_days = suggest_weekly_schedule(options)[:2]
 
-
-
     activity_coef = original_workout_days
     # this the bmr for lose and general bmr male/female
     bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5
-   
-
     if weight_change == "lose":
         daily_caloric_intake = bmr * 0.8
     else:
@@ -270,10 +287,6 @@ def calculate_activity_factor(user_info, suggest_weekly_schedule):
 
     activity_factor = (daily_caloric_intake + (weight_change_factor * 500)) / bmr
 
-   # blah = ("This is your recommended caloric intake per day with the activity factor:", ceil(activity_factor * daily_caloric_intake))
-    #print(blah)
-    #print ( "this is amount of calories added or subtracetd", abs(ceil(activity_factor * daily_caloric_intake)- daily_caloric_intake))
-    print ( "So each day you workout you should eat this ", abs(ceil(activity_factor * daily_caloric_intake)- daily_caloric_intake),"more claories")
     
     print ("you have a activity coeff of :", activity_coef , "so you should ACTUALLY eat about" ,  abs(ceil(activity_factor * daily_caloric_intake)- daily_caloric_intake), " more each day you workout to stay on target"  )
 
@@ -292,12 +305,9 @@ def main():
     user_info = ask_user_info()
     weight_change(user_info)
     
-   
-    activity_factor = calculate_activity_factor(user_info,suggest_weekly_schedule)
+   ### activity factor 
+    #activity_factor = calculate_activity_factor(user_info,suggest_weekly_schedule)
     
 
-
-
-    
     
 main()
