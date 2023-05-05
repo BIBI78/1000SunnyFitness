@@ -8,8 +8,48 @@ import time
 from math import ceil
 
 
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('1000_sunny_fitness')
+
+
+# Draws pirate flag
+def draw_jolly_roger():
+    print("WELCOME TO THE 1000 SUNNY")
+    jolly_roger =  '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
+    jolly_roger += '|                     ______                     |\n'
+    jolly_roger += '|                  .-"      "-.                  |\n'
+    jolly_roger += '|                 /            \                 |\n'
+    jolly_roger += '|     _          |              |          _     |\n'
+    jolly_roger += '|    ( \         |,  .-.  .-.  ,|         / )    |\n'
+    jolly_roger += '|     > "=._     | )(__/  \__)( |     _.=" <     |\n'
+    jolly_roger += '|    (_/"=._"=._ |/     /\     \| _.="_.="\_)    |\n'
+    jolly_roger += '|           "=._"(_     ^^     _)"_.="           |\n'
+    jolly_roger += '|               "=\__|IIIIII|__/="               |\n'
+    jolly_roger += '|              _.="| \IIIIII/ |"=._              |\n'
+    jolly_roger += '|    _     _.="_.="\          /"=._"=._     _    |\n'
+    jolly_roger += '|   ( \_.="_.="     `--------`     "=._"=._/ )   |\n'
+    jolly_roger += '|    > _.="                            "=._ <    |\n'
+    jolly_roger += '|   (_/   free young thug                  \_)   |\n'
+    jolly_roger += '|                                                |\n'
+    jolly_roger += '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
+    print(jolly_roger)
+
+#WEIGHT FUNCTIONS
+# Weight loss function , this calculates the days needed for the user to lose weight.
+# So this new function combines weight loss and and weight gain. 
+# this function takes the user data provided earlier and does  the necessary calculations for weight loss or gain
+
+#
+# new weight change test function - KG bs 
 def weight_change(user_info):
-    """this function takes user info parameter and works out weight change """
     weight_change = user_info["weight_change"]
     current_weight = user_info["weight"]
     desired_weight = user_info["desired_weight"]
@@ -20,15 +60,12 @@ def weight_change(user_info):
         # this is weight loss
         weight_loss_rate = current_weight - desired_weight
         deficit_needed = weight_loss_rate * 7700
-        # cest un peu le BMR
         recommended_deficit = (10*(current_weight) + 6.25*(height) - (5*age) + 5)
         days_needed = deficit_needed / recommended_deficit
         print(f"You should eat about {recommended_deficit} calories per day for about {days_needed} days")
         user_data = (current_weight, height, age, desired_weight)
-      
     else:
         # this is weight gain
-        #et ceci cest LA BMR
         BMR = 88.362 + (13.397 * current_weight) + (4.799 * height) - (5.677 * age)
         calories_per_day = BMR * 1.55 
         time_to_reach_desired_weight = (desired_weight - current_weight) / 0.5
@@ -36,10 +73,12 @@ def weight_change(user_info):
         print(f"and it will take approximately {time_to_reach_desired_weight} weeks to reach your desired weight.")
         user_data = (current_weight, height, age, desired_weight)
         # potential new code
-       
-    return user_data 
+    return user_data
+
 
 #USER INFO
+# I have editted this function over and over 
+#This should prompt the user to re-enter their information if they input an age over 150, a height over 251 cm, or a weight over 635 kg.
 def ask_user_info():
     print("WELCOME TO 1000 SUNNY FITNESS \n")
     name = input("What's your name?\n")
@@ -110,9 +149,26 @@ def ask_user_info():
             break
         else:
             print("Please enter 'yes' or 'no'.")
+
+
+    while True:
+        meal_plan = input("Would you like a meal plan? (yes or no): ")
+        if meal_plan.lower() == "yes":
+            user_info["meal_plan"] = suggest_meal_plan()
+            meal_types = user_info["meal_plan"]
+            options = {type: suggest_meal_options([type])[0] for type in meal_types}
+            user_info["suggest_weekly_meal_schedule"] = suggest_weekly_meal_schedule(options) 
+            break
+        elif meal_plan.lower() == "no":
+            break
+        else:
+            print("Please enter 'yes' or 'no'.")
     
 
     return user_info
+
+
+
 
 # WORKOUT SUGGESTIONS 
 # problem when i enter a comma after at exercise options
@@ -197,7 +253,6 @@ def suggest_workout_options(workout_types):
 
 #3
 # I suggest a weekly scheudle 
-
 def suggest_weekly_schedule(options, user_info):
     days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     workout_days_str = input("How many days a week would you like to work out? (1-7)\n")
@@ -252,45 +307,114 @@ def suggest_weekly_schedule(options, user_info):
 
 
 
-# ACTIVITY FACTOR
-#def calculate_activity_factor(user_info, suggest_weekly_schedule):
-    weight_change = user_info["weight_change"]
-    weight = user_info["weight"]
-    desired_weight = user_info["desired_weight"]
-    height = user_info["height"]
-    age = int(user_info["age"])
+
+#DIET // MEAL PLAN
+#1
+def suggest_meal_plan():
+    meals = []
+    options = ["vegan", "halal", "gluten free", "whatever"]
+    while len(meals) < 4:
+        meal = input("What meas would you liek to have do? (Enter one or more, separated by commas): vegan , halal, gluten free, whatever\n")
+        if all(c in ", " for c in meal):
+            print("Please enter at least one meal.")
+            continue
+        
+        for choice in meal.split(','):
+            choice = choice.strip().lower()
+            while choice not in options:
+                print("Sorry please choose from the options: vegan, halal, gluten free, whatever")
+                meal = input("What meals would you like to eat? (Enter one or more, separated by commas): vegan , halal, gluten free , whatever\n")
+                for choice in meal.split(','):
+                    choice = choice.strip().lower()
+                continue
+            if choice not in meals:
+                meals.append(choice)
+                if len(meals) == 4:
+                    break
+        if len(meals) < 4:
+            more_meals = input("Would you like to add any other meals? (yes or no)\n")
+            if more_meals.lower() == "no":
+                break
+            elif more_meals.lower() == "yes":
+                print("Here are the remaining meals you can still choose from: ")
+                for option in options:
+                    if option not in meals:
+                        print(option)
+                continue
+            else:
+                print("Please enter 'yes' or 'no'.")
+                continue
+    if len(meals) == 4:
+        print("You have chosen all 4.")
+    print(f" This is what you have chosen: {', '.join(meals)}")
+    return meals
+
+
+#2 suggest meal types
+#Here im gonna suggest meal options / types , in greater detail
+def suggest_meal_options(meal_types):
 
     options = {
-        "workout_plan": user_info["workout_plan"],
-        
+        "vegan": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
+        "gluten-free": ["brown rice", "buckwheat", "potatoes", "sweet potatoes", "quinoa", "almonds", "salmon"],
+        "halal": ["chicken", "beef", "lamb", "fish", "eggs", "beans", "nuts"],
+        "whatever": ["chicken", "salmon", "eggs", "broccoli", "brown rice", "quinoa", "avocado"]
     }
-   
-   # THIS IS THE ACTIVTY COEFF 
-    weekly_schedule, original_workout_days = suggest_weekly_schedule(options)[:2]
 
-    activity_coef = original_workout_days
-    # this the bmr for lose and general bmr male/female
-    bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5
-    if weight_change == "lose":
-        daily_caloric_intake = bmr * 0.8
-    else:
-        BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)
-        daily_caloric_intake = bmr * 1.2
+    chosen_options = []
+    for meal_type in meal_types:
+        print(f"Which {meal_type} meal type would you like (enter number separated by comma please)")
+        meals = options[meal_type]
+        for i, meal in enumerate(meals):
+            print(f"{i+1}.{meal}")
         
+        chosen = input()
+        chosen_meals = []
+        
+        while not chosen.replace(',','').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(meals) or min([int(num) for num in chosen.split(",")]) < 1 :
+            print("Invalid input. Please enter the numbers of the meals you would like to include (comma-separated please!!!).")
+            chosen = input()
+            
+        if chosen:
+            chosen_meals = [meals[int(num) - 1] for num in chosen.split(",")]
+            print("Here are the available meal options:")
+            print(", ".join(chosen_meals))
+        
+        chosen_options.append(chosen_meals)
+        
+    return chosen_options
 
-    if desired_weight > weight:
-        weight_change_factor = 1
-    elif desired_weight == weight:
-        weight_change_factor = 0
-    else:
-        weight_change_factor = -1
 
-    activity_factor = (daily_caloric_intake + (weight_change_factor * 500)) / bmr
 
+#3 
+#suggest meal schudle , days and shit 
+# this is gonna be a little different 
+def suggest_weekly_meal_schedule(options):
+    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    meal_days = input("How many days a week would you like to a meal plan? (1-7)\n")
+    while meal_days.isdigit() == False or int(meal_days) < 1 or int(meal_days) > 7:
+        meal_days = input("Invalid input. How many days a week would you like a food plan? (1-7)\n")
+    meal_days = int(meal_days)
+
+
+
+    all_meals = []
+    for meal_list in options.values():
+        all_meals.extend(meal_list)
     
-    print ("you have a activity coeff of :", activity_coef , "so you should ACTUALLY eat about" ,  abs(ceil(activity_factor * daily_caloric_intake)- daily_caloric_intake), " more each day you workout to stay on target"  )
+    weekly_schedule = {}
+    for day in days_of_week:
+        if meal_days == 0:
+            break
+        random.shuffle(all_meals)
+        meal_plan = ",".join(random.sample(all_meals,random.randint(1,len(all_meals))))
+        weekly_schedule[day] = meal_plan
+        meal_days -= 1
+    print("Voila food for the week:")
+    for day, plan in weekly_schedule.items():
+        print(f"{day}: {plan}")
+    return weekly_schedule
 
-    return activity_factor
 
 
 
@@ -301,12 +425,10 @@ def suggest_weekly_schedule(options, user_info):
 
 ##### MAIN #####
 def main():
-    
+    draw_jolly_roger()
     user_info = ask_user_info()
     weight_change(user_info)
-    
-   ### activity factor 
-    #activity_factor = calculate_activity_factor(user_info,suggest_weekly_schedule)
+   
     
 
     
