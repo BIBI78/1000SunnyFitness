@@ -361,31 +361,28 @@ def suggest_meal_options(meal_types):
     }
 
     chosen_options = []
+    
     for meal_type in meal_types:
-        print(f"Which {meal_type} meal type would you like? Enter the numbers separated by commas, please.")
-        meals = options.get(meal_type)
-        if meals is None:
-            print(f"No meal options available for {meal_type}. Skipping...")
-            chosen_options.append([])
-            continue
-
-        for i, meal in enumerate(meals):
-            print(f"{i+1}. {meal}")
-
+        print(f"Which {meal_type} meal type would you like? (Enter numbers separated by commas, please)")
+        meals = options[meal_type]
+        
+        for i, meal in enumerate(meals, start=1):
+            print(f"{i}. {meal}")
+        
         chosen = input()
         chosen_meals = []
-
-        while not all(num.strip().isdigit() and 1 <= int(num) <= len(meals) for num in chosen.split(",")):
-            print("Invalid input. Please enter valid meal numbers separated by commas.")
+        
+        while not all(num.strip().isnumeric() and 1 <= int(num) <= len(meals) for num in chosen.split(",")):
+            print("Invalid input. Please enter the numbers of the meals you would like to include (comma-separated, please!).")
+            
+            for i, meal in enumerate(meals, start=1):
+                print(f"{i}. {meal}")
+            
             chosen = input()
-
-        if chosen:
-            chosen_meals = [meals[int(num.strip()) - 1] for num in chosen.split(",")]
-            print("Here are the selected meal options:")
-            print(", ".join(chosen_meals))
-
+        
+        chosen_meals = [meals[int(num.strip()) - 1] for num in chosen.split(",")]
         chosen_options.append(chosen_meals)
-
+        
     return chosen_options
 
 
@@ -438,3 +435,4 @@ def main():
 
     
 main()
+
