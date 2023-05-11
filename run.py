@@ -220,35 +220,35 @@ def suggest_workout_plan():
 #2
 # I suggest exercise types 
 def suggest_workout_options(workout_types):
-    # this is my workout options, it takes the argument WORKOUT_TYPES
-    # options is a dictionary mapping each workout type to a list of exercises 
     options = {
         "cardio": ["hiking", "long distance running", "boxing", "walking"],
-        "weight lifting": ["bench press", "dumbbell press", "dead lift", "leg press", "squat", "pull up"],
-        "home workout": ["push ups", "sit ups", "squats", "jump rope", "crunches", "v ups"]
+        "weight lifting": ["bench press", "dumbbell press", "deadlift", "leg press", "squat", "pull-up"],
+        "home workout": ["push-ups", "sit-ups", "squats", "jump rope", "crunches", "v-ups"]
     }
-    # empty list with the users chosen options 
+
     chosen_options = []
-    # for loop on the argument ??? each type in workout ???
+    
     for workout_type in workout_types:
-        # print and ask user which workouts and their number 
-        print(f"Which {workout_type} exercises would you like to include in your workout? (enter numbers separated by commas please)")
+        print(f"Which {workout_type} exercises would you like to include in your workout? (Enter numbers separated by commas, please)")
         exercises = options[workout_type]
-        # this part is not mine, got help from a friend, try to rewrite this in my own way.!!!
-        for i, exercise in enumerate(exercises):
-            # pirnting numbered list
-            print(f"{i + 1}. {exercise}")
-            #user input
+        
+        for i, exercise in enumerate(exercises, start=1):
+            print(f"{i}. {exercise}")
+        
         chosen = input()
         chosen_exercises = []
-        #validates user input, in a very complicated way
-        while not chosen.replace(',', '').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(exercises) or min([int(num) for num in chosen.split(",")]) < 1:
-            print("Invalid input. Please enter the numbers of the exercises you would like to include (comma-separated please!!!).")
-            for i, exercise in enumerate(exercises):
-                print(f"{i + 1}. {exercise}")
+        
+        while not all(num.strip().isnumeric() and 1 <= int(num) <= len(exercises) for num in chosen.split(",")):
+            print("Invalid input. Please enter the numbers of the exercises you would like to include (comma-separated, please!).")
+            
+            for i, exercise in enumerate(exercises, start=1):
+                print(f"{i}. {exercise}")
+            
             chosen = input()
-        chosen_exercises = [exercises[int(num) - 1] for num in chosen.split(",")]
+        
+        chosen_exercises = [exercises[int(num.strip()) - 1] for num in chosen.split(",")]
         chosen_options.append(chosen_exercises)
+    
     return chosen_options
 
 #3
