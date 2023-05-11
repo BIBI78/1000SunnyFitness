@@ -8,16 +8,6 @@ import time
 from math import ceil
 
 
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('1000_sunny_fitness')
 
 
 # Draws pirate flag
@@ -43,12 +33,6 @@ def draw_jolly_roger():
     print(jolly_roger)
 
 #WEIGHT FUNCTIONS
-# Weight loss function , this calculates the days needed for the user to lose weight.
-# So this new function combines weight loss and and weight gain. 
-# this function takes the user data provided earlier and does  the necessary calculations for weight loss or gain
-
-#
-# new weight change test function - KG bs 
 def weight_change(user_info):
     weight_change = user_info["weight_change"]
     current_weight = user_info["weight"]
@@ -136,8 +120,45 @@ def ask_user_info():
 
     user_info = {"name": name, "age": age, "gender": gender, "weight_change": weight_change, "weight": weight, "desired_weight": desired_weight, "height": height}
 
-   
+
+
+
     while True:
+        picture = '''
+                                  _..  
+                                          .qd$$$$bp.
+                                        .q$$$$$$$$$$m.
+                                       .$$$$$$$$$$$$$$
+                                     .q$$$$$$$$$$$$$$$$
+                                    .$$$$$$$$$$$$P\\$$$$;
+                                  .q$$$$$$$$$P^"_.`;$$$$
+                                 q$$$$$$$P;\\   ,  /$$$$P
+                               .$$$P^::Y$/`  _  .:.$$$/
+                              .P.:..    \\ `._.-:.. \\$P
+                              $':.  __.. :   :..    :'
+                             /:_..::.   `. .:.    .'|
+                           _::..          T:..   /  :
+                        .::..             J:..  :  :
+                     .::..          7:..   F:.. :  ;
+                 _.::..             |:..   J:.. `./
+            _..:::..               /J:..    F:.  : 
+          .::::..                .T  \\:..   J:.  /
+         /:::...               .' `.  \\:..   F_o'
+        .:::...              .'     \\  \\:..  J ;
+        ::::...           .-'\\`.    _.`._\\:..  \\
+        ':::...         .'  `._7.-'_.-  `\\:.   \\
+         \\:::...   _..-'__.._/_.--' ,:.   b:.   \\._
+          `::::..-"_.'-"_..--"      :..   /):.   `.\\   
+            `-:/"-7.--""            _::.-'P::..    \\} 
+ _....------""""""            _..--".-'   \\::..     `-. 
+(::..              _...----"""  _.-'       `---:..    `-.
+ \\::..      _.-""""   `""""---""                `::...___)
+  `\\::..  .-"                           Free Young Thug
+    `"""""   
+'''
+
+        clear_terminal()
+        print(picture)
         workout_plan = input("Would you like a workout plan? (yes or no): ")
         if workout_plan.lower() == "yes":
             user_info["workout_plan"] = suggest_workout_plan()
@@ -146,20 +167,6 @@ def ask_user_info():
             user_info["weekly_schedule"] = suggest_weekly_schedule(options,user_info) 
             break
         elif workout_plan.lower() == "no":
-            break
-        else:
-            print("Please enter 'yes' or 'no'.")
-
-
-    while True:
-        meal_plan = input("Would you like a meal plan? (yes or no): ")
-        if meal_plan.lower() == "yes":
-            user_info["meal_plan"] = suggest_meal_plan()
-            meal_types = user_info["meal_plan"]
-            options = {type: suggest_meal_options([type])[0] for type in meal_types}
-            user_info["suggest_weekly_meal_schedule"] = suggest_weekly_meal_schedule(options) 
-            break
-        elif meal_plan.lower() == "no":
             break
         else:
             print("Please enter 'yes' or 'no'.")
@@ -220,35 +227,35 @@ def suggest_workout_plan():
 #2
 # I suggest exercise types 
 def suggest_workout_options(workout_types):
-    # this is my workout options, it takes the argument WORKOUT_TYPES
-    # options is a dictionary mapping each workout type to a list of exercises 
     options = {
         "cardio": ["hiking", "long distance running", "boxing", "walking"],
-        "weight lifting": ["bench press", "dumbbell press", "dead lift", "leg press", "squat", "pull up"],
-        "home workout": ["push ups", "sit ups", "squats", "jump rope", "crunches", "v ups"]
+        "weight lifting": ["bench press", "dumbbell press", "deadlift", "leg press", "squat", "pull-up"],
+        "home workout": ["push-ups", "sit-ups", "squats", "jump rope", "crunches", "v-ups"]
     }
-    # empty list with the users chosen options 
+
     chosen_options = []
-    # for loop on the argument ??? each type in workout ???
+    
     for workout_type in workout_types:
-        # print and ask user which workouts and their number 
-        print(f"Which {workout_type} exercises would you like to include in your workout? (enter numbers separated by commas please)")
+        print(f"Which {workout_type} exercises would you like to include in your workout? (Enter numbers separated by commas, please)")
         exercises = options[workout_type]
-        # this part is not mine, got help from a friend, try to rewrite this in my own way.!!!
-        for i, exercise in enumerate(exercises):
-            # pirnting numbered list
-            print(f"{i + 1}. {exercise}")
-            #user input
+        
+        for i, exercise in enumerate(exercises, start=1):
+            print(f"{i}. {exercise}")
+        
         chosen = input()
         chosen_exercises = []
-        #validates user input, in a very complicated way
-        while not chosen.replace(',', '').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(exercises) or min([int(num) for num in chosen.split(",")]) < 1:
-            print("Invalid input. Please enter the numbers of the exercises you would like to include (comma-separated please!!!).")
-            for i, exercise in enumerate(exercises):
-                print(f"{i + 1}. {exercise}")
+        
+        while not all(num.strip().isnumeric() and 1 <= int(num) <= len(exercises) for num in chosen.split(",")):
+            print("Invalid input. Please enter the numbers of the exercises you would like to include (comma-separated, please!).")
+            
+            for i, exercise in enumerate(exercises, start=1):
+                print(f"{i}. {exercise}")
+            
             chosen = input()
-        chosen_exercises = [exercises[int(num) - 1] for num in chosen.split(",")]
+        
+        chosen_exercises = [exercises[int(num.strip()) - 1] for num in chosen.split(",")]
         chosen_options.append(chosen_exercises)
+    
     return chosen_options
 
 #3
@@ -306,126 +313,57 @@ def suggest_weekly_schedule(options, user_info):
 
 
 
+## ATTEMPT TO CLEAR TERMINAL 
+
+def clear_terminal():
+    # Clear the terminal screen
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
-#DIET // MEAL PLAN
-#1
-def suggest_meal_plan():
-    meals = []
-    options = ["vegan", "halal", "gluten free", "whatever"]
-    while len(meals) < 4:
-        meal = input("What meas would you liek to have do? (Enter one or more, separated by commas): vegan , halal, gluten free, whatever\n")
-        if all(c in ", " for c in meal):
-            print("Please enter at least one meal.")
-            continue
-        
-        for choice in meal.split(','):
-            choice = choice.strip().lower()
-            while choice not in options:
-                print("Sorry please choose from the options: vegan, halal, gluten free, whatever")
-                meal = input("What meals would you like to eat? (Enter one or more, separated by commas): vegan , halal, gluten free , whatever\n")
-                for choice in meal.split(','):
-                    choice = choice.strip().lower()
-                continue
-            if choice not in meals:
-                meals.append(choice)
-                if len(meals) == 4:
-                    break
-        if len(meals) < 4:
-            more_meals = input("Would you like to add any other meals? (yes or no)\n")
-            if more_meals.lower() == "no":
-                break
-            elif more_meals.lower() == "yes":
-                print("Here are the remaining meals you can still choose from: ")
-                for option in options:
-                    if option not in meals:
-                        print(option)
-                continue
-            else:
-                print("Please enter 'yes' or 'no'.")
-                continue
-    if len(meals) == 4:
-        print("You have chosen all 4.")
-    print(f" This is what you have chosen: {', '.join(meals)}")
-    return meals
-
-
-#2 suggest meal types
-#Here im gonna suggest meal options / types , in greater detail
-def suggest_meal_options(meal_types):
-
-    options = {
-        "vegan": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
-        "gluten-free": ["brown rice", "buckwheat", "potatoes", "sweet potatoes", "quinoa", "almonds", "salmon"],
-        "halal": ["chicken", "beef", "lamb", "fish", "eggs", "beans", "nuts"],
-        "whatever": ["chicken", "salmon", "eggs", "broccoli", "brown rice", "quinoa", "avocado"]
-    }
-
-    chosen_options = []
-    for meal_type in meal_types:
-        print(f"Which {meal_type} meal type would you like (enter number separated by comma please)")
-        meals = options[meal_type]
-        for i, meal in enumerate(meals):
-            print(f"{i+1}.{meal}")
-        
-        chosen = input()
-        chosen_meals = []
-        
-        while not chosen.replace(',','').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(meals) or min([int(num) for num in chosen.split(",")]) < 1 :
-            print("Invalid input. Please enter the numbers of the meals you would like to include (comma-separated please!!!).")
-            chosen = input()
-            
-        if chosen:
-            chosen_meals = [meals[int(num) - 1] for num in chosen.split(",")]
-            print("Here are the available meal options:")
-            print(", ".join(chosen_meals))
-        
-        chosen_options.append(chosen_meals)
-        
-    return chosen_options
-
-
-
-#3 
-#suggest meal schudle , days and shit 
-# this is gonna be a little different 
-def suggest_weekly_meal_schedule(options):
-    days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    meal_days = input("How many days a week would you like to a meal plan? (1-7)\n")
-    while meal_days.isdigit() == False or int(meal_days) < 1 or int(meal_days) > 7:
-        meal_days = input("Invalid input. How many days a week would you like a food plan? (1-7)\n")
-    meal_days = int(meal_days)
-
-
-
-    all_meals = []
-    for meal_list in options.values():
-        all_meals.extend(meal_list)
+def print_picture(picture):
+    # Clear the terminal screen
+    clear_terminal()
     
-    weekly_schedule = {}
-    for day in days_of_week:
-        if meal_days == 0:
-            break
-        random.shuffle(all_meals)
-        meal_plan = ",".join(random.sample(all_meals,random.randint(1,len(all_meals))))
-        weekly_schedule[day] = meal_plan
-        meal_days -= 1
-    print("Voila food for the week:")
-    for day, plan in weekly_schedule.items():
-        print(f"{day}: {plan}")
-    return weekly_schedule
+    # Print the picture
+    print(picture)
 
-
-
-
-
-
-
+picture = '''
+                                  _..  
+                                          .qd$$$$bp.
+                                        .q$$$$$$$$$$m.
+                                       .$$$$$$$$$$$$$$
+                                     .q$$$$$$$$$$$$$$$$
+                                    .$$$$$$$$$$$$P\\$$$$;
+                                  .q$$$$$$$$$P^"_.`;$$$$
+                                 q$$$$$$$P;\\   ,  /$$$$P
+                               .$$$P^::Y$/`  _  .:.$$$/
+                              .P.:..    \\ `._.-:.. \\$P
+                              $':.  __.. :   :..    :'
+                             /:_..::.   `. .:.    .'|
+                           _::..          T:..   /  :
+                        .::..             J:..  :  :
+                     .::..          7:..   F:.. :  ;
+                 _.::..             |:..   J:.. `./
+            _..:::..               /J:..    F:.  : 
+          .::::..                .T  \\:..   J:.  /
+         /:::...               .' `.  \\:..   F_o'
+        .:::...              .'     \\  \\:..  J ;
+        ::::...           .-'\\`.    _.`._\\:..  \\
+        ':::...         .'  `._7.-'_.-  `\\:.   \\
+         \\:::...   _..-'__.._/_.--' ,:.   b:.   \\._
+          `::::..-"_.'-"_..--"      :..   /):.   `.\\   
+            `-:/"-7.--""            _::.-'P::..    \\} 
+ _....------""""""            _..--".-'   \\::..     `-. 
+(::..              _...----"""  _.-'       `---:..    `-.
+ \\::..      _.-""""   `""""---""                `::...___)
+  `\\::..  .-"                           Free Young Thug
+    `"""""   
+'''
 
 
 ##### MAIN #####
 def main():
-    draw_jolly_roger()
+    
     user_info = ask_user_info()
     weight_change(user_info)
    
@@ -433,3 +371,5 @@ def main():
 
     
 main()
+
+
