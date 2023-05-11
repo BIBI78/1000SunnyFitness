@@ -131,23 +131,15 @@ def ask_user_info():
         except ValueError:
             print("Invalid input, please enter a number")
 
+
+   
+
     user_info = {"name": name, "age": age, "gender": gender, "weight_change": weight_change, "weight": weight, "desired_weight": desired_weight, "height": height}
 
-    while True:
-        workout_plan = input("Would you like a workout plan? (yes or no): ")
-        if workout_plan.lower() == "yes":
-            user_info["workout_plan"] = suggest_workout_plan()
-            workout_types = user_info["workout_plan"]
-            options = {type: suggest_workout_options([type])[0] for type in workout_types}
-            user_info["weekly_schedule"] = suggest_weekly_schedule(options) 
-            break
-        elif workout_plan.lower() == "no":
-            break
-        else:
-            print("Please enter 'yes' or 'no'.")
+
 
     while True:
-        meal_plan = input("Would you like a meal plan? (yes or no): ")
+        meal_plan = input("Would you like a meal plan ? Or do you only drink your food?? (yes or no): ")
         if meal_plan.lower() == "yes":
             user_info["meal_plan"] = suggest_meal_plan()
             meal_types = user_info["meal_plan"]
@@ -159,10 +151,21 @@ def ask_user_info():
         else:
             print("Please enter 'yes' or 'no'.")
 
+    while True:
+        workout_plan = input("Would you like a workout plan? (yes or no): ")
+        if workout_plan.lower() == "yes":
+            user_info["workout_plan"] = suggest_workout_plan()
+            workout_types = user_info["workout_plan"]
+            options = {type: suggest_workout_options([type])[0] for type in workout_types}
+            user_info["weekly_schedule"] = suggest_weekly_schedule(options,user_info) 
+            break
+        elif workout_plan.lower() == "no":
+            break
+        else:
+            print("Please enter 'yes' or 'no'.")
+    
 
     return user_info
-
-       
 
 
 
@@ -250,12 +253,13 @@ def suggest_workout_options(workout_types):
 
 #3
 # I suggest a weekly scheudle 
-def suggest_weekly_schedule(options):
+def suggest_weekly_schedule(options, user_info):
     days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-    workout_days = input("How many days a week would you like to work out? (1-7)\n")
-    while workout_days.isdigit() == False or int(workout_days) < 1 or int(workout_days) > 7:
-        workout_days = input("Invalid input. How many days a week would you like to work out? (1-7)\n")
-    workout_days = int(workout_days)
+    workout_days_str = input("How many days a week would you like to work out? (1-7)\n")
+    while workout_days_str.isdigit() == False or int(workout_days_str) < 1 or int(workout_days_str) > 7:
+        workout_days_str = input("Invalid input. How many days a week would you like to work out? (1-7)\n")
+    workout_days = int(workout_days_str)
+    original_workout_days = workout_days
     
     all_exercises = []
     for exercise_list in options.values():
@@ -269,10 +273,37 @@ def suggest_weekly_schedule(options):
         workout_plan = ", ".join(random.sample(all_exercises, random.randint(1, len(all_exercises))))
         weekly_schedule[day] = workout_plan
         workout_days -= 1
+    
+    weight_change = user_info["weight_change"]
+    weight = user_info["weight"]
+    desired_weight = user_info["desired_weight"]
+    height = user_info["height"]
+    age = int(user_info["age"])
+
+    activity_coef = original_workout_days
+    bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5
+    if weight_change == "lose":
+        daily_caloric_intake = bmr * 0.8
+    else:
+        daily_caloric_intake = bmr * 1.2
+        
+    if desired_weight > weight:
+        weight_change_factor = 1
+    elif desired_weight == weight:
+        weight_change_factor = 0
+    else:
+        weight_change_factor = -1
+
+    activity_factor = (daily_caloric_intake + (weight_change_factor * 500)) / bmr
+
     print("Here's your weekly workout schedule:")
     for day, plan in weekly_schedule.items():
         print(f"{day}: {plan}")
-    return weekly_schedule
+    
+    print("You have an activity coefficient of:", activity_coef, "so you should ACTUALLY eat about", abs(ceil(activity_factor * daily_caloric_intake)- daily_caloric_intake), "more each day you workout to stay on target.")
+
+    return weekly_schedule, original_workout_days, activity_factor
+
 
 
 
@@ -322,7 +353,6 @@ def suggest_meal_plan():
 #2 suggest meal types
 #Here im gonna suggest meal options / types , in greater detail
 def suggest_meal_options(meal_types):
-
     options = {
         "vegan": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
         "gluten-free": ["brown rice", "buckwheat", "potatoes", "sweet potatoes", "quinoa", "almonds", "salmon"],
@@ -332,26 +362,32 @@ def suggest_meal_options(meal_types):
 
     chosen_options = []
     for meal_type in meal_types:
-        print(f"Which {meal_type} meal type would you like (enter number separated by comma please)")
-        meals = options[meal_type]
+        print(f"Which {meal_type} meal type would you like? Enter the numbers separated by commas, please.")
+        meals = options.get(meal_type)
+        if meals is None:
+            print(f"No meal options available for {meal_type}. Skipping...")
+            chosen_options.append([])
+            continue
+
         for i, meal in enumerate(meals):
-            print(f"{i+1}.{meal}")
-        
+            print(f"{i+1}. {meal}")
+
         chosen = input()
         chosen_meals = []
-        
-        while not chosen.replace(',','').isnumeric() or max([int(num) for num in chosen.split(",")]) > len(meals) or min([int(num) for num in chosen.split(",")]) < 1 :
-            print("Invalid input. Please enter the numbers of the meals you would like to include (comma-separated please!!!).")
+
+        while not all(num.strip().isdigit() and 1 <= int(num) <= len(meals) for num in chosen.split(",")):
+            print("Invalid input. Please enter valid meal numbers separated by commas.")
             chosen = input()
-            
+
         if chosen:
-            chosen_meals = [meals[int(num) - 1] for num in chosen.split(",")]
-            print("Here are the available meal options:")
+            chosen_meals = [meals[int(num.strip()) - 1] for num in chosen.split(",")]
+            print("Here are the selected meal options:")
             print(", ".join(chosen_meals))
-        
+
         chosen_options.append(chosen_meals)
-        
+
     return chosen_options
+
 
 
 
@@ -388,42 +424,6 @@ def suggest_weekly_meal_schedule(options):
 
 
 
-#### ACTIVITY FACTOR
-def calculate_activity_factor(user_info):
-    #we extract data from the user info 
-    # so whats the problem 
-    weight_change = user_info["weight_change"]
-    weight = user_info["weight"]
-    desired_weight = user_info["desired_weight"]
-    height = user_info["height"]
-    age = int(user_info["age"])
-   
-
-    bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5
-
-    if weight_change == "lose":
-        
-        daily_caloric_intake = bmr * 0.8
-
-
-    else:
-        daily_caloric_intake = bmr * 1.2
-
-    if desired_weight > weight:
-        weight_change_factor = 1
-    elif desired_weight == weight:
-        weight_change_factor = 0
-    else:
-        weight_change_factor = -1
-
-    activity_factor = (daily_caloric_intake + (weight_change_factor * 500)) / bmr
-
-    blah= (("this is your recommned caloric intake lil bro a day with the  AF :"), ceil( activity_factor * daily_caloric_intake))
-    print(blah)
-
-    return activity_factor
-
-
 
 
 
@@ -433,8 +433,7 @@ def main():
     draw_jolly_roger()
     user_info = ask_user_info()
     weight_change(user_info)
-    #re ecrire sk8.py, envleve les fotions on a pas besoin 
-    calculate_activity_factor(user_info)
+   
     
 
     
