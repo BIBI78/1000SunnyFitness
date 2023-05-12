@@ -6,42 +6,9 @@ import json
 import random
 import time 
 from math import ceil
+import os
 
 
-
-# GIRL PICTURE 
-picture = '''
-                                  _..  
-                                          .qd$$$$bp.
-                                        .q$$$$$$$$$$m.
-                                       .$$$$$$$$$$$$$$
-                                     .q$$$$$$$$$$$$$$$$
-                                    .$$$$$$$$$$$$P\\$$$$;
-                                  .q$$$$$$$$$P^"_.`;$$$$
-                                 q$$$$$$$P;\\   ,  /$$$$P
-                               .$$$P^::Y$/`  _  .:.$$$/
-                              .P.:..    \\ `._.-:.. \\$P
-                              $':.  __.. :   :..    :'
-                             /:_..::.   `. .:.    .'|
-                           _::..          T:..   /  :
-                        .::..             J:..  :  :
-                     .::..          7:..   F:.. :  ;
-                 _.::..             |:..   J:.. `./
-            _..:::..               /J:..    F:.  : 
-          .::::..                .T  \\:..   J:.  /
-         /:::...               .' `.  \\:..   F_o'
-        .:::...              .'     \\  \\:..  J ;
-        ::::...           .-'\\`.    _.`._\\:..  \\
-        ':::...         .'  `._7.-'_.-  `\\:.   \\
-         \\:::...   _..-'__.._/_.--' ,:.   b:.   \\._
-          `::::..-"_.'-"_..--"      :..   /):.   `.\\   
-            `-:/"-7.--""            _::.-'P::..    \\} 
- _....------""""""            _..--".-'   \\::..     `-. 
-(::..              _...----"""  _.-'       `---:..    `-.
- \\::..      _.-""""   `""""---""                `::...___)
-  `\\::..  .-"                           Free Young Thug
-    `"""""   
-'''
 
 
 # Draws pirate flag
@@ -154,9 +121,10 @@ def ask_user_info():
 
     user_info = {"name": name, "age": age, "gender": gender, "weight_change": weight_change, "weight": weight, "desired_weight": desired_weight, "height": height}
 
+    
 
-
-    clear_terminal()
+    display_picture()
+    #clear_terminal()
     while True:
         workout_plan = input("Would you like a workout plan? (yes or no): ")
         if workout_plan.lower() == "yes":
@@ -313,11 +281,51 @@ def suggest_weekly_schedule(options, user_info):
 
 
 ## ATTEMPT TO CLEAR TERMINAL 
+# GIRL PICTURE 
 
-import os
 
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def display_picture():
+    clear_terminal()
+    picture = '''
+                                  _..  
+                                          .qd$$$$bp.
+                                        .q$$$$$$$$$$m.
+                                       .$$$$$$$$$$$$$$
+                                     .q$$$$$$$$$$$$$$$$
+                                    .$$$$$$$$$$$$P\\$$$$;
+                                  .q$$$$$$$$$P^"_.`;$$$$
+                                 q$$$$$$$P;\\   ,  /$$$$P
+                               .$$$P^::Y$/`  _  .:.$$$/
+                              .P.:..    \\ `._.-:.. \\$P
+                              $':.  __.. :   :..    :'
+                             /:_..::.   `. .:.    .'|
+                           _::..          T:..   /  :
+                        .::..             J:..  :  :
+                     .::..          7:..   F:.. :  ;
+                 _.::..             |:..   J:.. `./
+            _..:::..               /J:..    F:.  : 
+          .::::..                .T  \\:..   J:.  /
+         /:::...               .' `.  \\:..   F_o'
+        .:::...              .'     \\  \\:..  J ;
+        ::::...           .-'\\`.    _.`._\\:..  \\
+        ':::...         .'  `._7.-'_.-  `\\:.   \\
+         \\:::...   _..-'__.._/_.--' ,:.   b:.   \\._
+          `::::..-"_.'-"_..--"      :..   /):.   `.\\   
+            `-:/"-7.--""            _::.-'P::..    \\} 
+ _....------""""""            _..--".-'   \\::..     `-. 
+(::..              _...----"""  _.-'       `---:..    `-.
+ \\::..      _.-""""   `""""---""                `::...___)
+  `\\::..  .-"                           Free Young Thug
+    `"""""   
+'''
+
+    
+    print(picture)
+
 
 
 
