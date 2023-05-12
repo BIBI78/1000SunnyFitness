@@ -48,6 +48,30 @@ def draw_jolly_roger():
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def display_goodbye_picture():
+    clear_terminal()
+    goodbye_picture =  '''
+
+
+                         .;&&=.      .;&&s,                                        
+                        ::%%&&&~;   ;::%% ';                                  
+                      _:::%%%  '*\ ;::%%%  ';                               
+                    _;:::%%%%;   *;::%%%%;  ';                              
+                 _;:::::%%%%%;   *:::%%%%%.   '                              
+               _;::::::%%%%%;    *;::%%%%%%%.  '._                           
+             _;:::::%%%%%%;    _*; \::%%%%%%.=~:'                                     
+          _::::::%%%%%%%'   _**:'   '=:=~::%%;~                               
+       .::::%%%%%%%%%%%===***~'    _.-::::%;~                                     
+           ~~_--===--~~~~~~~==+._.+:::%' %:                                                  
+              =;::::::%%%%%%,   *;:::%' .;                                  
+                =;::::::%%%%%%   |::%' .;                                 
+                    ~;::::%%%%% *;::% .'                                  
+                       ~'+%%%P=' '~%P~     
+                       Good luck <333
+
+'''
+    print(goodbye_picture)
+
 
 def display_girl_picture():
     clear_terminal()
@@ -80,7 +104,7 @@ def display_girl_picture():
  _....------""""""            _..--".-'   \\::..     `-. 
 (::..              _...----"""  _.-'       `---:..    `-.
  \\::..      _.-""""   `""""---""                `::...___)
-  `\\::..  .-"                           Free Young Thug
+  `\\::..  .-"                           How about some physical activity?
     `"""""   
 '''
 
@@ -110,7 +134,7 @@ def display_drink_picture():
                /\\
               /;;\\
          ==============
-         Free Young Thug
+         Do you only drink your meals? *GLUG GLUG GLUG* or ???
     """ 
     print(drink_picture)
 
@@ -213,7 +237,7 @@ def ask_user_info():
 
     while True:
         display_drink_picture()
-        meal_plan = input("Would you like a meal plan ? Or do you only drink your food?? (yes or no): ")
+        meal_plan = input("Would you like a meal plan ?(yes or no): ")
         if meal_plan.lower() == "yes":
             user_info["meal_plan"] = suggest_meal_plan()
             meal_types = user_info["meal_plan"]
@@ -239,7 +263,7 @@ def ask_user_info():
         else:
             print("Please enter 'yes' or 'no'.")
     
-
+    display_goodbye_picture()
     return user_info
 
 
@@ -510,4 +534,5 @@ def main():
 
     
 main()
+
 
