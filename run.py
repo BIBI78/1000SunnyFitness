@@ -6,7 +6,7 @@ import json
 import random
 import time 
 from math import ceil
-
+import os
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -41,6 +41,79 @@ def draw_jolly_roger():
     jolly_roger += '|                                                |\n'
     jolly_roger += '.=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-.\n'
     print(jolly_roger)
+
+
+
+###  CLEAR TERMINAL DISPALY IMAGES 
+def clear_terminal():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def display_girl_picture():
+    clear_terminal()
+    girl_picture = '''
+                                  _..  
+                                          .qd$$$$bp.
+                                        .q$$$$$$$$$$m.
+                                       .$$$$$$$$$$$$$$
+                                     .q$$$$$$$$$$$$$$$$
+                                    .$$$$$$$$$$$$P\\$$$$;
+                                  .q$$$$$$$$$P^"_.`;$$$$
+                                 q$$$$$$$P;\\   ,  /$$$$P
+                               .$$$P^::Y$/`  _  .:.$$$/
+                              .P.:..    \\ `._.-:.. \\$P
+                              $':.  __.. :   :..    :'
+                             /:_..::.   `. .:.    .'|
+                           _::..          T:..   /  :
+                        .::..             J:..  :  :
+                     .::..          7:..   F:.. :  ;
+                 _.::..             |:..   J:.. `./
+            _..:::..               /J:..    F:.  : 
+          .::::..                .T  \\:..   J:.  /
+         /:::...               .' `.  \\:..   F_o'
+        .:::...              .'     \\  \\:..  J ;
+        ::::...           .-'\\`.    _.`._\\:..  \\
+        ':::...         .'  `._7.-'_.-  `\\:.   \\
+         \\:::...   _..-'__.._/_.--' ,:.   b:.   \\._
+          `::::..-"_.'-"_..--"      :..   /):.   `.\\   
+            `-:/"-7.--""            _::.-'P::..    \\} 
+ _....------""""""            _..--".-'   \\::..     `-. 
+(::..              _...----"""  _.-'       `---:..    `-.
+ \\::..      _.-""""   `""""---""                `::...___)
+  `\\::..  .-"                           Free Young Thug
+    `"""""   
+'''
+
+    
+    print(girl_picture)
+
+def display_drink_picture():
+    clear_terminal()
+    drink_picture =  """
+       ()   ()      ()    /
+      ()      ()  ()  /
+       ______________/___
+       \            /   /
+        \^^^^^^^^^^/^^^/
+         \     ___/   /
+          \   (   )  /
+           \  (___) /
+            \ /    /
+             \    /
+              \  /
+               \/
+               ||
+               ||
+               ||
+               ||
+               ||
+               /\\
+              /;;\\
+         ==============
+         Free Young Thug
+    """ 
+    print(drink_picture)
+
 
 #WEIGHT FUNCTIONS
 # Weight loss function , this calculates the days needed for the user to lose weight.
@@ -139,6 +212,7 @@ def ask_user_info():
 
 
     while True:
+        display_drink_picture()
         meal_plan = input("Would you like a meal plan ? Or do you only drink your food?? (yes or no): ")
         if meal_plan.lower() == "yes":
             user_info["meal_plan"] = suggest_meal_plan()
@@ -152,6 +226,7 @@ def ask_user_info():
             print("Please enter 'yes' or 'no'.")
 
     while True:
+        display_girl_picture()
         workout_plan = input("Would you like a workout plan? (yes or no): ")
         if workout_plan.lower() == "yes":
             user_info["workout_plan"] = suggest_workout_plan()
