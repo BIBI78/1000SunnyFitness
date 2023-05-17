@@ -52,10 +52,16 @@
 
 ## Workout Functions 
 ![Workout Functions](assets/images/workout_functions.png)
-* These functions essentially work as a family , one depends on the other. 
+* These functions essentially work as a family , one depends on the other.  ( for clarity I label them 1-3, so the reader can follow)
+### Suggest Workout Plan (function 1)
 * The first function takes no parameters and creates a list "exercises",  I use a while loop to ask the user which exercises they would like to do all the while I am checking with another while loop if the input is valid ( this is a method I use throughout the entire project) ![while loop validation suggest workout 1](assets/images/sgp1.png)
-* I then check if the user has chosen all the suggested exercises and if not I give them the oppotunity to add more. This is also a method I use nearly everywhere in the project.
+* I then check if the user has chosen all the suggested exercises and if not I give them the oppotunity to add more, I essentially ask "would you like to add more?" and if the answer is no I break the loop if not the loop starts again. All the while the user input is checked for validation, on everything everywhere. If the input is not valid , the user gets one of the error messages. This is also a method I use nearly everywhere in the project.
 ![while loop on users exercices](assets/images/swp2.png)
+### Suggest Workout Options (function 2)
+* Unlike the first funtion in this family, here we take a paremter , "workout_types". I create the dictionary "options" to store the exercise options for each workout_type then I create an empty list called " chosen_options" to store the users chosen exercies for each workout type. ![workout types parameter](assets/images/f1.2.workout_type.png) Here I iterate over the  workout types given in the "workout_types" parameter. This was the trickiest part to wrap my head around. The rest of the function I use for loops and empty lists "par for the course". The function returns a list containing the users chosen exercices from each workout type.
+### Suggest Weekly Schedule (function 3)
+* *NOTE* This function takes 2 parameters because I do a supplemetary calulcation depending on the users previous input.
+*  First the function creates a list "days_of_the_week" and I ask the user to enter a number between 1-7 coressponding to how many days a week they would like to workout then I make sure the input is valid and convert it to an integer. What is a little tricky is this section here. ![workout weekly schedule](assets/images/f1.3.weekly_schedule.png) Here an empty dictionary is created so I can store a workout plan for each day of the week that the user has chosen. I use a loop to asisgn a workout plan to each day of the week (that is the workout_days variable that Im counting).  Then the "all_exercises" list is randomly shuffled and a random exercise is selected for that day then the random selection of exercises are stored in "workout_plan" and after all that the workout plan is matched to the corresponding day in the "weekly_schedule" dictionary. Finally the "workout_days" variable is decremented.
 
 
 ## Activity Factor

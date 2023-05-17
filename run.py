@@ -382,6 +382,9 @@ def suggest_weekly_schedule(options, user_info):
     height = user_info["height"]
     age = int(user_info["age"])
 
+    """
+    Here I calculate the Activity Factor
+    """
     activity_coef = original_workout_days
     bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5
     if weight_change == "lose":
