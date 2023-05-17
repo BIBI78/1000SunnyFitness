@@ -39,7 +39,7 @@
 * Welcome to the 1000 Sunny. What I have tried to create here is a basic and direct fitness web application. The name for this app "1000 Sunny" comes from my favorite manga One Piece, it is the name of the pirate ship they ride around in. The idea may be a little odd but I essentially am trying to create a Gym on the ship. It is not really essential to the functionality of the app but it gives me and the user a little context to opperate in. So the user is welcomed aboard the 1000 Sunny and then asked questions the correspond to their fitness goals and then the app  provides them with the proper information to help them get there. From what I have seen most fitness apps have too much going on and that repulses some people, the goal was to strip everything down to the basics and produce something minimalist but useful.
 
 *NOTE*
-* With respect to fitness and the science behind it ,almost all of the litterature is written in the lanaguage of male/female. I tried to to stay away from that completely. So I modified a lot of the typical equations to fit a more general and up to date point of view. I ask the user " what they identify as?" but that information is just fomality and has nothing to do with the calucations. Also as much as I can remember they user is refered to as they/Them. 
+* With respect to fitness and the science behind it ,almost all of the litterature is written in the lanaguage of male/female. I tried to to stay away from that completely. So I modified a lot of the typical equations to fit a more general and up to date point of view. I ask the user " what they identify as?" but that information is just fomality and has nothing to do with the calucations. Also as much as I can remember the user is refered to as They/Them. 
 
 
 # Features # 
@@ -74,10 +74,10 @@ Inside the suggest_weekly_schedule I extract weight ,height etc , from "user_inf
 * The next "family" of functions offer the user a meal plan or a diet to help them on their fitness journey. 
 * These functions do EXACTLY the same thing as the workout functions above so there is no need to explain them. The only diffence is in syntax, instead of workout types its food types , vegan, halal etc.![Meal Functions](assets/images/f1.4.meal-functions.png)
 * With respect to variety,I tried to give a decent variety of options, vegan , halal , gluten free, then whatever ( which is a mix of everything , I want this app to feel human and this is how I talk and I am human, also I want to create things that I would use and would like to see, programs that are more fluid and direct instead of the feeling that you are being used and the person behind the program is actually a robot themselves.)  
-## Clear Terminal 
-* kinda works
+## Clear Terminal / Image Display
+* This is a pretty self explanatory function, I clear the terminal for each major "section" of the app then display and image. ![Clear Terminal](assets/images/clear_term.png). Was defintely more tricky to make work with all the other functions than I expected.
 
-## WHILE LOOPS
+## WHILE LOOPS / Validation
 * Theres a bunch of while loops , i should explain those.
 
 
