@@ -487,7 +487,7 @@ def suggest_meal_options(meal_types):
         
         chosen = input()
         chosen_meals = []
-        
+        # HERE IS WHAT I WANT TO EXPLAIN MORE
         while not all(num.strip().isnumeric() and 1 <= int(num) <= len(meals) for num in chosen.split(",")):
             print("Invalid input. Please enter the numbers of the meals you would like to include (comma-separated, please!).")
             
