@@ -1,6 +1,6 @@
 # 1000 SUNNY FITNESS ##
 
-[Project 3](LINK TO PROJET 3)
+[Project 3](project_3)
 
 ![ Main images](assets/images/1000sunny.webp)
 
@@ -15,14 +15,10 @@
     - [Weight Change](#weight-change) 
     - [Workout Functions](#workout-functions)
     - [Meal Functions](#meal-functions)
-  - [Testing](#testing)
-    - [HTML](#html)
-    - [CSS](#css)
+  - [ASCII art](#ascii-art)
     - [Spread sheet](#spread-sheet)
-    - [Java Script](#java-script)
-    - [Individual Page Testing](#individual-page-testing)
-  - [Bugs](#bugs)
-    - [Bugs in CSS](#bugs-in-css)
+  - [Testing](#testing)
+    - [Spread Sheet](#bugs-in-css)
     - [Bugs in Java Script](#bugs-in-java-script)
     - [Bugs in HTML](#bugs-in-html)
     - [Tutor suggestions](#tutuor-suggetions)
@@ -30,7 +26,7 @@
     - [Cloning and Forking](#cloning-and-forking)
     - [Local Deployment](#local-deployment)
     - [Remote Deployment](#remote-deployment)
-  - [Media](#media)
+  - [Things I wanted to do but did not have the time](#media)
   - [Credits and Acknowledgements](#credits)
   - [Additional Notes](#additional-notes)
 
@@ -70,31 +66,34 @@
 * Here , if the user has chosen to have a workout plan I take that into account. ![Activity Coeff](assets/images/f1.3.2_act_factor.png)
 Inside the suggest_weekly_schedule I extract weight ,height etc , from "user_info" so I can recalculate the BMR. I determine the "weight_change_factor" byt the relationship between weight and desired_weight. If the desired weight is lower the weight weight factor will be -1, if the factor is higher , thats weight gain, 0, weight maitenance. Then I do a rough calculation to determine how much MORE the user should eat on the days the workout( if any).
 
-## Meal Functions
+### Meal Functions
 * The next "family" of functions offer the user a meal plan or a diet to help them on their fitness journey. 
 * These functions do EXACTLY the same thing as the workout functions above so there is no need to explain them. The only diffence is in syntax, instead of workout types its food types , vegan, halal etc.![Meal Functions](assets/images/f1.4.meal-functions.png)
 * With respect to variety,I tried to give a decent variety of options, vegan , halal , gluten free, then whatever ( which is a mix of everything , I want this app to feel human and this is how I talk and I am human, also I want to create things that I would use and would like to see, programs that are more fluid and direct instead of the feeling that you are being used and the person behind the program is actually a robot themselves.)  
+
 ## Clear Terminal / Image Display
 * This is a pretty self explanatory function, I clear the terminal for each major "section" of the app then display and image. ![Clear Terminal](assets/images/clear_term.png). Was defintely more tricky to make work with all the other functions than I expected.
 
+
+# ASCII ART
+* Theres nothing too special going on here. I have four ASCII images displayed in the terminal.! [Girl Image](assets/images/ascii_girl.png)
+All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the Jolly Roger Pirate flag. [Jolly Roger](assets/images/ascii_pirate_flag.png)In the early stages that was the first or second part I added to this project. It essentially shaped everything else in my minds eye. Also you can the way the prirate flag is written is totally different from the other 3 ASCII images. This is because the pirate flag I did at the beginning of the project and the other images towards the very end.
+
 ## WHILE LOOPS / Validation
-* Theres a bunch of while loops , i should explain those.
+* In many ways this project is just a huge exercise in validation and error handling. The vast majorty of my mental energy and time was spent checking user input was valid. I went from taking user input and making it lower case to for simple yes and no input to the very ends of what felt like was insanity and checked for spaces and commas. 
+* The methods I use are the more or less the same throughout the project but Ill explain "the crown jewel" here. I went through this more times than I can count to end up at this version. Lets look at the "suggest_meal_options" function. I´ll walk through the entire function so everything makes sense in context.![Suggest Meal Options](assets/images/f2.2.meal_options_val_example.png) So first I loop over each meal_type in meal_types then I ask the user to choose an option from meal type then I go and get in from the options dictionary based on that selection. I then display the meal option with its corresponding number which the use will now choose from. This is where I have to use more precise langauge than I am used to and or comfortable with. I ask the user to "Enter numbers separated by commas" after Ive just given them a list with food names in the terminal, which may be a little counter-intuitive but it is the best I could do. So I am now taking the comma seperated user input and storing it in an empty list. Now for the validation ! The following while loop is what I use to do the validation. [While Loop](assets/images/f2.2.while_loop.png), The while loop checks if the input is numeric and fits in the range of meal options. If input is inlavid we get an error message as is expected.
 
+* ADD MORE EXPLAMES ; THE BOUNDS AND SHIT 
 
-
-# ERRROR CHECKING AND VALIDATION
-* This project in its own way could be seen as an exercise in error handling and validation. Every question to the user is handled and validated ( essentially I make sure all the information I get from the user is legit. ) Doing this took up most of my time and mental ability.
-## add image ??
-* every step of the way , pretty my this whole project is an exrcise in error handling and validation
 
 # Bugs # 
 * There were alot of bugs ohlalala.
 
-
+an optio
 # Problems
 * I have hard time storing variables , Super hard time, taking info from other fucntions then using it or displaying it somehwere else. its tricky.
 
-
+#
 # NOTES # 
 * The more I worked on this project the more I have learned to do things better and differntly as I progressed towards the end. It seems like theres a never-ending " better way" to do things in python. Once I solved a problem, left it and then came back to copy the function or whatever it was, to use it somewhere else I had found a better way to write the code. I could rewrite the code in this project over and over in endlessly different ways but that wouldnt get me anywhere so Ive settled for what Ive submitted here. Trying to make things work a "certain" way(thats to say how I saw them working in the narrow visoion of myminds eye) all the time was totally at my disadvatge. The problems, the way in which they arose and were eventually solved give my project flexibilty , which , from what Ive learned is more important than perfection.
 

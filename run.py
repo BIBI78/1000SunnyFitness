@@ -45,9 +45,15 @@ def draw_jolly_roger():
 
 ###  CLEAR TERMINAL DISPALY IMAGES 
 def clear_terminal():
+    """
+    Clears terminal
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def display_goodbye_picture():
+    """
+    Clears terminal dispalys goodbye picture
+    """
     clear_terminal()
     goodbye_picture =  '''
 
@@ -73,6 +79,9 @@ def display_goodbye_picture():
 
 
 def display_girl_picture():
+    """
+    Clears terminal displays girl image
+    """
     clear_terminal()
     girl_picture = '''
                                   _..  
@@ -240,7 +249,7 @@ def ask_user_info():
 
 
     while True:
-        display_drink_picture()
+        #display_drink_picture()
         meal_plan = input("Would you like a meal plan ?(yes or no): ")
         if meal_plan.lower() == "yes":
             user_info["meal_plan"] = suggest_meal_plan()
@@ -254,7 +263,7 @@ def ask_user_info():
             print("Please enter 'yes' or 'no'.")
 
     while True:
-        display_girl_picture()
+        #display_girl_picture()
         workout_plan = input("Would you like a workout plan? (yes or no): ")
         if workout_plan.lower() == "yes":
             user_info["workout_plan"] = suggest_workout_plan()
@@ -267,7 +276,7 @@ def ask_user_info():
         else:
             print("Please enter 'yes' or 'no'.")
     
-    display_goodbye_picture()
+    #display_goodbye_picture()
     return user_info
 
 
@@ -536,9 +545,7 @@ def main():
     user_info = ask_user_info()
     weight_change(user_info)
    
-    
 
-    
 main()
 
 
