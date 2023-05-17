@@ -1,5 +1,41 @@
 # 1000 SUNNY FITNESS ##
 
+[Project 3](LINK TO PROJET 3)
+
+![ Main images](assets/images/1000sunny.webp)
+
+## Table of contents 
+
+- [1000 Sunny ](#project_3)
+- [Table of contents](#table-of-contents)
+- [Introduction / Abouut](#introduction)
+ - [Features](#features)
+    - [Options](#options)
+    - [Navigation](#navigation) 
+    - [Rules](#rules)
+    - [Styling](#styling) 
+    - [Design](#design)
+    - [Typography](#typography)
+  - [Testing](#testing)
+    - [HTML](#html)
+    - [CSS](#css)
+    - [Spread sheet](#spread-sheet)
+    - [Java Script](#java-script)
+    - [Individual Page Testing](#individual-page-testing)
+  - [Bugs](#bugs)
+    - [Bugs in CSS](#bugs-in-css)
+    - [Bugs in Java Script](#bugs-in-java-script)
+    - [Bugs in HTML](#bugs-in-html)
+    - [Tutor suggestions](#tutuor-suggetions)
+  - [Deployment](#deployment)
+    - [Cloning and Forking](#cloning-and-forking)
+    - [Local Deployment](#local-deployment)
+    - [Remote Deployment](#remote-deployment)
+  - [Media](#media)
+  - [Credits and Acknowledgements](#credits)
+  - [Additional Notes](#additional-notes)
+
+
 # ABOUT  # 
 * This is basically a simple fitness app. I wanted to create something "useful" that people can actually use. It seems lately these kind of apps are all the rage so I decided to test my metal and see if I could make something work. Ive been re-reading One Piece so  I wanted to the give the user the impression that they are joing a Gym on a pirate ship for no other reason than it gave me sopmething to visualize in my mind and made it easier to work with. So welcome abaord the Thousand Sunny.
 
