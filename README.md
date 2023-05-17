@@ -62,11 +62,10 @@
 ### Suggest Weekly Schedule (function 3)
 * *NOTE* This function takes 2 parameters because I do a supplemetary calulcation depending on the users previous input.
 *  First the function creates a list "days_of_the_week" and I ask the user to enter a number between 1-7 coressponding to how many days a week they would like to workout then I make sure the input is valid and convert it to an integer. What is a little tricky is this section here. ![workout weekly schedule](assets/images/f1.3.weekly_schedule.png) Here an empty dictionary is created so I can store a workout plan for each day of the week that the user has chosen. I use a loop to asisgn a workout plan to each day of the week (that is the workout_days variable that Im counting).  Then the "all_exercises" list is randomly shuffled and a random exercise is selected for that day then the random selection of exercises are stored in "workout_plan" and after all that the workout plan is matched to the corresponding day in the "weekly_schedule" dictionary. Finally the "workout_days" variable is decremented.
+### Activity Factor (function 3.2)
 
-
-## Activity Factor
-* With this function I take into account  how many days if any the user has chosen to workout and do a little calculation and give the user the nuber of claories they should eat extra due to workout.
-
+* Here , if the user has chosen to have a workout plan I take that into account. ![Activity Coeff](assets/images/f1.3.2_act_factor.png)
+Inside the suggest_weekly_schedule I extract weight ,height etc , from "user_info" so I can recalculate the BMR. I determine the "weight_change_factor" byt the relationship between weight and desired_weight. If the desired weight is lower the weight weight factor will be -1, if the factor is higher , thats weight gain, 0, weight maitenance. Then I do a rough calculation to determine how much MORE the user should eat on the days the workout( if any).
 
 * Meals
 * I do something very similar for the meal funtion. I give the user the option to choose a weekly meal plan according to their preferecnes.

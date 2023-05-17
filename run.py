@@ -376,6 +376,9 @@ def suggest_weekly_schedule(options, user_info):
         weekly_schedule[day] = workout_plan
         workout_days -= 1
     
+    """
+    This is part of the activity coef function.
+    """
     weight_change = user_info["weight_change"]
     weight = user_info["weight"]
     desired_weight = user_info["desired_weight"]
