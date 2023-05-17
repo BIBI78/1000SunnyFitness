@@ -16,8 +16,7 @@ SCOPE = [
 
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('1000_sunny_fitness')
+
 
 
 # Draws pirate flag
@@ -140,13 +139,11 @@ def display_drink_picture():
 
 
 #WEIGHT FUNCTIONS
-# Weight loss function , this calculates the days needed for the user to lose weight.
-# So this new function combines weight loss and and weight gain. 
-# this function takes the user data provided earlier and does  the necessary calculations for weight loss or gain
-
-#
-# new weight change test function - KG bs 
 def weight_change(user_info):
+    """
+    Calculates weight loss/gain for user and calories need per day
+
+    """
     weight_change = user_info["weight_change"]
     current_weight = user_info["weight"]
     desired_weight = user_info["desired_weight"]
@@ -154,7 +151,10 @@ def weight_change(user_info):
     age = int(user_info["age"]) # convert age to integer
 
     if weight_change == "lose":
-        # this is weight loss
+        """
+        Calculates user weight loss and caloric deficit per day
+       
+        """
         weight_loss_rate = current_weight - desired_weight
         deficit_needed = weight_loss_rate * 7700
         recommended_deficit = (10*(current_weight) + 6.25*(height) - (5*age) + 5)
@@ -162,7 +162,9 @@ def weight_change(user_info):
         print(f"You should eat about {recommended_deficit} calories per day for about {days_needed} days")
         user_data = (current_weight, height, age, desired_weight)
     else:
-        # this is weight gain
+        """
+        Calculate weight gain , calories per day.
+        """
         BMR = 88.362 + (13.397 * current_weight) + (4.799 * height) - (5.677 * age)
         calories_per_day = BMR * 1.55 
         time_to_reach_desired_weight = (desired_weight - current_weight) / 0.5
@@ -174,9 +176,11 @@ def weight_change(user_info):
 
 
 #USER INFO
-# I have editted this function over and over 
-#This should prompt the user to re-enter their information if they input an age over 150, a height over 251 cm, or a weight over 635 kg.
+ 
 def ask_user_info():
+    """
+     Asks user age,height,weight etc, 
+    """
     print("WELCOME TO 1000 SUNNY FITNESS \n")
     name = input("What's your name?\n")
     while True:
@@ -269,8 +273,7 @@ def ask_user_info():
 
 
 
-# WORKOUT SUGGESTIONS 
-# problem when i enter a comma after at exercise options
+# WORKOUT FUNCTIONS 
 #1
 def suggest_workout_plan():
     exercises = []
@@ -407,8 +410,8 @@ def suggest_weekly_schedule(options, user_info):
 
 
 
-#DIET // MEAL PLAN
-#1
+#MEAL PLAN
+#1 suggest meal plan
 def suggest_meal_plan():
     meals = []
     options = ["vegan", "halal", "gluten free", "whatever"]
@@ -450,7 +453,6 @@ def suggest_meal_plan():
 
 
 #2 suggest meal types
-#Here im gonna suggest meal options / types , in greater detail
 def suggest_meal_options(meal_types):
     options = {
         "vegan": ["tofu", "lentils", "quinoa", "spinach", "broccoli", "almonds", "oats"],
@@ -487,9 +489,7 @@ def suggest_meal_options(meal_types):
 
 
 
-#3 
-#suggest meal schudle , days and shit 
-# this is gonna be a little different 
+#3 suggest weekly meal schedule 
 def suggest_weekly_meal_schedule(options):
     days_of_week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     meal_days = input("How many days a week would you like to a meal plan? (1-7)\n")

@@ -8,12 +8,11 @@
 
 - [1000 Sunny ](#project_3)
 - [Table of contents](#table-of-contents)
-- [Introduction / Abouut](#introduction)
+- [Introduction / About](#introduction)
  - [Features](#features)
-    - [Options](#options)
-    - [Navigation](#navigation) 
-    - [Rules](#rules)
-    - [Styling](#styling) 
+    -[Main Functions](#main-functions)
+    - [User Info](#user-info)
+    - [Weight Change](#weight-change) 
     - [Design](#design)
     - [Typography](#typography)
   - [Testing](#testing)
@@ -35,21 +34,33 @@
   - [Credits and Acknowledgements](#credits)
   - [Additional Notes](#additional-notes)
 
-
+# Introduction #
 # ABOUT  # 
-* This is basically a simple fitness app. I wanted to create something "useful" that people can actually use. It seems lately these kind of apps are all the rage so I decided to test my metal and see if I could make something work. Ive been re-reading One Piece so  I wanted to the give the user the impression that they are joing a Gym on a pirate ship for no other reason than it gave me sopmething to visualize in my mind and made it easier to work with. So welcome abaord the Thousand Sunny.
+* Welcome to the 1000 Sunny. What I have tried to create here is a basic and direct fitness web application. The name for this app "1000 Sunny" comes from my favorite manga One Piece, it is the name of the pirate ship they ride around in. The idea may be a little odd but I essentially am trying to create a Gym on the ship. It is not really essential to the functionality of the app but it gives me and the user a little context to opperate in. So the user is welcomed aboard the 1000 Sunny and then asked questions the correspond to their fitness goals and then the app  provides them with the proper information to help them get there. From what I have seen most fitness apps have too much going on and that repulses some people, the goal was to strip everything down to the basics and produce something minimalist but useful.
+
 
 # Features # 
-* * weight change function
-* In this app I do some basic calculations on the user's height, weight , age etc and things like that to give them information and estimation on their fitness gols.  
-I calculate the amount of calories they should consume each day and for how many days to get to their goal.
+# Main Functions
+## User Info
+* This is essentially the main function, it is the essential intersection of everything. I Ask the user for some simple information then this infomation called later. 
+* What is interesting about this function  are the bounds I place on the numerical inputs. I make sure the values are not too small or too big ( everything needs to be near human) so the BMR equation I use later makes sense.
+* ![user info bound 1](assets/images/ask_user_info.png)
 
+## Weight Change 
+### Weight Loss/Gain
+* This is the first function I wrote for this project , it essentially asks the user if they would like lose or gain weight then depending on their response responds accordingly and at the end gives them an estimated time it will take to achive this goal and how many calories per day they need to stay on mission. Nothing too fancy here , simple if/else condition.
 
-## Workout 
-* I give the user the option of getting a workout plan for the week. I suggest the types of workouts depending on their fitness goals , that is to say , gain muscle or lose weight .
+## Workout Functions 
+![Workout Functions](assets/images/workout_functions.png)
+* These functions essentially work as a family , one depends on the other. 
+* The first function takes no parameters and creates a list "exercises",  I use a while loop to ask the user which exercises they would like to do all the while I am checking with another while loop if the input is valid ( this is a method I use throughout the entire project) ![while loop validation suggest workout 1](assets/images/sgp1.png)
+* I then check if the user has chosen all the suggested exercises and if not I give them the oppotunity to add more. This is also a method I use nearly everywhere in the project.
+![while loop on users exercices](assets/images/swp2.png)
+
 
 ## Activity Factor
 * With this function I take into account  how many days if any the user has chosen to workout and do a little calculation and give the user the nuber of claories they should eat extra due to workout.
+
 
 * Meals
 * I do something very similar for the meal funtion. I give the user the option to choose a weekly meal plan according to their preferecnes.
