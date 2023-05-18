@@ -80,25 +80,6 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 * In many ways this project is just a huge exercise in validation and error handling. The vast majorty of my mental energy and time was spent checking user input was valid. I went from taking user input and making it lower case to for simple yes and no input to the very ends of what felt like was insanity and checked for spaces and commas. 
 * The methods I use are the more or less the same throughout the project but Ill explain "the crown jewel" here. I went through this more times than I can count to end up at this version. Lets look at the "suggest_meal_options" function. I´ll walk through the entire function so everything makes sense in context.![Suggest Meal Options](assets/images/f2.2.meal_options_val_example.png) So first I loop over each meal_type in meal_types then I ask the user to choose an option from meal type then I go and get in from the options dictionary based on that selection. I then display the meal option with its corresponding number which the use will now choose from. This is where I have to use more precise langauge than I am used to and or comfortable with. I ask the user to "Enter numbers separated by commas" after Ive just given them a list with food names in the terminal, which may be a little counter-intuitive but it is the best I could do. So I am now taking the comma seperated user input and storing it in an empty list. Now for the validation ! The following while loop is what I use to do the validation. ![While Loop](assets/images/f2.2.while_loop.png), The while loop checks if the input is numeric and fits in the range of meal options. If input is inlavid we get an error message as is expected. Here we need to unpack a little ![Crown Jewel](assets/images/f2.2.corwn_jewel_validation.png)  The ".split" splits the user input by commas , then " int(num.strip())" converts each number into an intger after it removies any white spice by using strip(). This is the most important part, There were so many combinations or invalid input that crashed the whole program that this was more than necessary. Now the rest of the function works as exepected , I decrement meal from the meals list and I get a new list called "chosen_meals". chosen_meals gets appeneded to the chosen_options which stores the selected meal options and then returns it.
 
-# Things I Wanted Do
-- I spent a lot more time than I thought on displaying images in the terminal. Previously I had wanted to clear the terminal and display an image for each "section" but that quickly became a tangle of thorns. Too much extracting and rewritting. I ended up rewriting  and reaaraning so many times I lost track of what I was doing.
-- I wanted to make the whole appl "modular" but I didnt have time to completely wrap my head around that, I  started trying to figure it out, I put different fucntions in different files but I didnt have the time to really grasp it and finish it.
-
-
-
-# NOUBLIE PAS A FAIRE CA
-# Bugs # 
-* I dont even know where to start with the bugs. I had so many throoughout the whoel project,but I think they are all more or less resolved. The error handling was long. I had to learn and relearn a lot and Im still not totally sure. Looping and itietering overlist and and then checking things were input properly and looping again made space for so many bugs. Theres one thing I couldnt solve or didnt have the time to solve. I try my best to explain in plain english . NOUBLIE PAS A FAIRE CA 
-
-an optio
-# Problems
-* I have hard time storing variables , Super hard time, taking info from other fucntions then using it or displaying it somehwere else. its tricky.
-
-#
-# NOTES # 
-* The more I worked on this project the more I have learned to do things better and differntly as I progressed towards the end. It seems like theres a never-ending " better way" to do things in python. Once I solved a problem, left it and then came back to copy the function or whatever it was, to use it somewhere else I had found a better way to write the code. I could rewrite the code in this project over and over in endlessly different ways but that wouldnt get me anywhere so Ive settled for what Ive submitted here. Trying to make things work a "certain" way(thats to say how I saw them working in the narrow visoion of myminds eye) all the time was totally at my disadvatge. The problems, the way in which they arose and were eventually solved give my project flexibilty , which , from what Ive learned is more important than perfection.
-
-
 
 # TESTING
 `Testing In Gitpod`
@@ -130,5 +111,22 @@ an optio
 | Calories per day / amount of time need to acheive weight goal | All results make sense | Pass |
 
 
+# Things I Wanted Do
+- I spent a lot more time than I thought on displaying images in the terminal. Previously I had wanted to clear the terminal and display an image for each "section" but that quickly became a tangle of thorns. Too much extracting and rewritting. I ended up rewriting  and reaaraning so many times I lost track of what I was doing.
+- I wanted to make the whole appl "modular" but I didnt have time to completely wrap my head around that, I  started trying to figure it out, I put different fucntions in different files but I didnt have the time to really grasp it and finish it.
 
-|
+
+
+# NOUBLIE PAS A FAIRE CA
+# Bugs # 
+* I dont even know where to start with the bugs. I had so many throoughout the whoel project,but I think they are all more or less resolved. The error handling was long. I had to learn and relearn a lot and Im still not totally sure. Looping and itietering overlist and and then checking things were input properly and looping again made space for so many bugs. Theres one thing I couldnt solve or didnt have the time to solve. I try my best to explain in plain english . NOUBLIE PAS A FAIRE CA 
+
+an optio
+# Problems
+* I have hard time storing variables , Super hard time, taking info from other fucntions then using it or displaying it somehwere else. its tricky.
+
+#
+# NOTES # 
+* The more I worked on this project the more I have learned to do things better and differntly as I progressed towards the end. It seems like theres a never-ending " better way" to do things in python. Once I solved a problem, left it and then came back to copy the function or whatever it was, to use it somewhere else I had found a better way to write the code. I could rewrite the code in this project over and over in endlessly different ways but that wouldnt get me anywhere so Ive settled for what Ive submitted here. Trying to make things work a "certain" way(thats to say how I saw them working in the narrow visoion of myminds eye) all the time was totally at my disadvatge. The problems, the way in which they arose and were eventually solved give my project flexibilty , which , from what Ive learned is more important than perfection.
+
+
