@@ -228,7 +228,7 @@ def ask_user_info():
     }
 
     while True:
-        display_drink_picture()
+        #display_drink_picture()
         meal_plan = input("Would you like a meal plan? (yes or no): ")
         if meal_plan.lower() == "yes":
             user_info["meal_plan"] = suggest_meal_plan()
@@ -242,7 +242,7 @@ def ask_user_info():
             print("Please enter 'yes' or 'no'.")
 
     while True:
-        display_girl_picture()
+        #display_girl_picture()
         workout_plan = input("Would you like a workout plan? (yes or no): ")
         if workout_plan.lower() == "yes":
             user_info["workout_plan"] = suggest_workout_plan()
@@ -518,7 +518,7 @@ def main():
     draw_jolly_roger()
     user_info = ask_user_info()
     weight_changed(user_info)
-    #display_goodbye_picture()
+    display_goodbye_picture()
 
 
 if __name__ == "__main__":
