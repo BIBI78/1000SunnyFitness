@@ -123,6 +123,10 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 
 an optio
 # Problems
+## ASSCI Image Display 
+* I havent beeen to find a solution to the way I display images in the terminal.![Image Problem](assets/images/image_terminal_problem.png). It just doesnt display nicely and  it happens so fast  user is not aware that some results are above the image.The first thing I tried was moving all the user results to the very end of the program but that was more difficult than expected and I ened rewritting things akwardly.
+* The second thing I tried was clearing the terminal then  printing the image but that gave me problems displayiing the user results. So what Ive decided to do is leave a version of the app called "image.py" with the still in it in case I want to come back and solve it.
+
 * I have hard time storing variables , Super hard time, taking info from other fucntions then using it or displaying it somehwere else. its tricky.
 
 #
