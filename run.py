@@ -34,7 +34,7 @@ def draw_jolly_roger():
 
 def display_goodbye_picture():
     """
-    Clears terminal displays goodbye picture
+    Displays goodbye picture
     """
     
     goodbye_picture = '''
@@ -59,7 +59,7 @@ def display_goodbye_picture():
 
 def display_girl_picture():
     """
-    Clears terminal display's girl image
+    Display's girl image
     """
     
     girl_picture = '''
@@ -254,7 +254,7 @@ def ask_user_info():
             break
         else:
             print("Please enter 'yes' or 'no'.")
-        display_goodbye_picture()
+        #display_goodbye_picture()
     return user_info
 
 
@@ -518,6 +518,7 @@ def main():
     draw_jolly_roger()
     user_info = ask_user_info()
     weight_changed(user_info)
+    #display_goodbye_picture()
 
 
 if __name__ == "__main__":

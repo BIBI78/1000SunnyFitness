@@ -44,7 +44,8 @@
 
 ## Weight Change 
 ### Weight Loss/Gain
-* This is the first function I wrote for this project , it essentially asks the user if they would like lose or gain weight then depending on their response responds accordingly and at the end gives them an estimated time it will take to achive this goal and how many calories per day they need to stay on mission. Nothing too fancy here , simple if/else condition.
+* This is the first function I wrote for this project , it essentially asks the user if they would like lose or gain weight then depending on their response responds accordingly and at the end gives them an estimated time it will take to achive this goal and how many calories per day they need to stay on mission. Nothing too fancy here , simple if/else condition.![Weight Change](assets/images/weight_change.png) 
+and of course there is the error handling there to make sure the user enters lose or gain.
 
 ## Workout Functions 
 ![Workout Functions](assets/images/workout_functions.png)
@@ -77,6 +78,9 @@ Inside the suggest_weekly_schedule I extract weight ,height etc , from "user_inf
 All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the Jolly Roger Pirate flag. [Jolly Roger](assets/images/ascii_pirate_flag.png)In the early stages that was the first or second part I added to this project. It essentially shaped everything else in my minds eye. Also you can the way the prirate flag is written is totally different from the other 3 ASCII images. This is because the pirate flag I did at the beginning of the project and the other images towards the very end.
 
 ## WHILE LOOPS / Validation
+** *NOTE* 
+** The only time any empty space is allowed as valid input is when the user is asked for the name or their identity, I think no name , or "  " , is a valid answer. Everywhere else where a number or word is needed the empty space returns an error.
+
 * In many ways this project is just a huge exercise in validation and error handling. The vast majorty of my mental energy and time was spent checking user input was valid. I went from taking user input and making it lower case to for simple yes and no input to the very ends of what felt like was insanity and checked for spaces and commas. 
 * The methods I use are the more or less the same throughout the project but Ill explain "the crown jewel" here. I went through this more times than I can count to end up at this version. Lets look at the "suggest_meal_options" function. I´ll walk through the entire function so everything makes sense in context.![Suggest Meal Options](assets/images/f2.2.meal_options_val_example.png) So first I loop over each meal_type in meal_types then I ask the user to choose an option from meal type then I go and get in from the options dictionary based on that selection. I then display the meal option with its corresponding number which the use will now choose from. This is where I have to use more precise langauge than I am used to and or comfortable with. I ask the user to "Enter numbers separated by commas" after Ive just given them a list with food names in the terminal, which may be a little counter-intuitive but it is the best I could do. So I am now taking the comma seperated user input and storing it in an empty list. Now for the validation ! The following while loop is what I use to do the validation. ![While Loop](assets/images/f2.2.while_loop.png), The while loop checks if the input is numeric and fits in the range of meal options. If input is inlavid we get an error message as is expected. Here we need to unpack a little ![Crown Jewel](assets/images/f2.2.corwn_jewel_validation.png)  The ".split" splits the user input by commas , then " int(num.strip())" converts each number into an intger after it removies any white spice by using strip(). This is the most important part, There were so many combinations or invalid input that crashed the whole program that this was more than necessary. Now the rest of the function works as exepected , I decrement meal from the meals list and I get a new list called "chosen_meals". chosen_meals gets appeneded to the chosen_options which stores the selected meal options and then returns it.
 
@@ -124,7 +128,7 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 an optio
 # Problems
 ## ASSCI Image Display 
-* I havent beeen to find a solution to the way I display images in the terminal.![Image Problem](assets/images/image_terminal_problem.png). It just doesnt display nicely and  it happens so fast  user is not aware that some results are above the image.The first thing I tried was moving all the user results to the very end of the program but that was more difficult than expected and I ened rewritting things akwardly.
+* I havent beeen to find a solution to the way I display images in the terminal.![Image Problem](assets/images/image_terminal_problem.png).It just doesnt display nicely and  it happens so fast  user is not aware that some results are above the image.The first thing I tried was moving all the user results to the very end of the program but that was more difficult than expected and I ened rewritting things akwardly.
 * The second thing I tried was clearing the terminal then  printing the image but that gave me problems displayiing the user results. So what Ive decided to do is leave a version of the app called "image.py" with the still in it in case I want to come back and solve it.
 
 * I have hard time storing variables , Super hard time, taking info from other fucntions then using it or displaying it somehwere else. its tricky.
