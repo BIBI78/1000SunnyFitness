@@ -119,6 +119,8 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 - I spent a lot more time than I thought on displaying images in the terminal. Previously I had wanted to clear the terminal and display an image for each "section" but that quickly became a tangle of thorns. Too much extracting and rewritting. I ended up rewriting  and reaaraning so many times I lost track of what I was doing.
 - I wanted to make the whole appl "modular" but I didnt have time to completely wrap my head around that, I  started trying to figure it out, I put different fucntions in different files but I didnt have the time to really grasp it and finish it.
 
+# PEP8 VALIDATION
+*
 
 
 # NOUBLIE PAS A FAIRE CA

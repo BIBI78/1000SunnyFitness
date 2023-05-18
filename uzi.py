@@ -34,9 +34,8 @@ def draw_jolly_roger():
 
 def display_goodbye_picture():
     """
-    Clears terminal displays goodbye picture
+    Displays goodbye picture
     """
-    
     goodbye_picture = '''
                          .;&&=.      .;&&s,
                         ::%%&&&~;   ;::%% ';
@@ -59,9 +58,8 @@ def display_goodbye_picture():
 
 def display_girl_picture():
     """
-    Clears terminal display's girl image
+    Display's girl image
     """
-    
     girl_picture = '''
                                   _..
                                           .qd$$$$bp.
@@ -143,19 +141,23 @@ def weight_changed(user_info):
         """
         weight_loss_rate = current_weight - desired_weight
         deficit_needed = weight_loss_rate * 7700
-        recommended_deficit = (10 * current_weight + 6.25 * height - (5 * age) + 5)
+        recommended_deficit = (10 * current_weight + 6.25 * height - (5*age)+5)
         days_needed = deficit_needed / recommended_deficit
-        print(f"You should eat about {recommended_deficit} calories per day for about {days_needed} days")
+        print(f"You should eat {recommended_deficit} calories per day"
+              f"for about {days_needed} days")
         user_data = (current_weight, height, age, desired_weight)
     else:
         """
         Calculate weight gain, calories per day.
         """
-        body_mass_index = 88.362 + (13.397 * current_weight) + (4.799 * height) - (5.677 * age)
+        body_mass_index = (88.362 + (13.397 * current_weight) +
+                           (4.799 * height) - (5.677 * age))
         calories_per_day = body_mass_index * 1.55
         time_to_reach_desired_weight = (desired_weight - current_weight) / 0.5
-        print("To gain this weight, you should eat about", ceil(calories_per_day), "calories per day.")
-        print(f"and it will take approximately {time_to_reach_desired_weight} weeks to reach your desired weight.")
+        print("To gain this weight, you should eat about",
+              ceil(calories_per_day), "calories per day.")
+        print(f"and it will take approximately {time_to_reach_desired_weight}"
+              f"weeks to reach your desired weight.")
         user_data = (current_weight, height, age, desired_weight)
     return user_data
 
@@ -163,10 +165,12 @@ def weight_changed(user_info):
 # USER INFO
 def ask_user_info():
     """
-    Asks user age, height, weight etc.
+    Asks user age, height, weight, etc.
     """
-    print("WELCOME TO 1000 SUNNY FITNESS \n")
+    print("WELCOME TO 1000 SUNNY FITNESS\n")
+
     name = input("What's your name?\n")
+
     while True:
         age = input("How old are you?\n")
         if age.isnumeric() and int(age) > 0:
@@ -175,9 +179,11 @@ def ask_user_info():
                 continue
             break
         print("Sorry matey, let's get your age again.")
+
     gender = input("What do you identify as?\n")
+
     while True:
-        weight_change = input("Would you like to lose or gain weight? (lose or gain): ")
+        weight_change = input("Would you like to lose or gain weight? (lose or gain):")
         if weight_change == "lose" or weight_change == "gain":
             break
         print("That doesn't work, please enter either 'lose' or 'gain'")
@@ -194,11 +200,15 @@ def ask_user_info():
 
     while True:
         try:
-            desired_weight = float(input("Enter your desired weight in kg: ")) if weight_change == "lose" else float(
-                input("Enter the weight you'd like to build up to (in kg): "))
+            if weight_change == "lose":
+                desired_weight = float(input("Enter your desired weight in kg: "))
+            else:
+                desired_weight = float(input("Enter the weight you'd like to build up to (in kg): "))
+
             if desired_weight <= 0 or desired_weight > 635:
                 print("This app is for humans, please enter a human weight.")
                 continue
+
             if weight_change == "gain" and desired_weight <= weight:
                 raise ValueError("Desired weight must be greater than current weight.")
             elif weight_change == "lose" and desired_weight >= weight:
@@ -228,7 +238,6 @@ def ask_user_info():
     }
 
     while True:
-        display_drink_picture()
         meal_plan = input("Would you like a meal plan? (yes or no): ")
         if meal_plan.lower() == "yes":
             user_info["meal_plan"] = suggest_meal_plan()
@@ -242,7 +251,6 @@ def ask_user_info():
             print("Please enter 'yes' or 'no'.")
 
     while True:
-        display_girl_picture()
         workout_plan = input("Would you like a workout plan? (yes or no): ")
         if workout_plan.lower() == "yes":
             user_info["workout_plan"] = suggest_workout_plan()
@@ -254,9 +262,9 @@ def ask_user_info():
             break
         else:
             print("Please enter 'yes' or 'no'.")
-        display_goodbye_picture()
     return user_info
 
+   
 
 # WORKOUT FUNCTIONS
 # 1
@@ -518,7 +526,7 @@ def main():
     draw_jolly_roger()
     user_info = ask_user_info()
     weight_changed(user_info)
-
-
+    
+    
 if __name__ == "__main__":
     main()

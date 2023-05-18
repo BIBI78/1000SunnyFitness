@@ -518,7 +518,7 @@ def main():
     draw_jolly_roger()
     user_info = ask_user_info()
     weight_changed(user_info)
-    display_goodbye_picture()
+    #display_goodbye_picture()
 
 
 if __name__ == "__main__":
