@@ -98,3 +98,37 @@ an optio
 # NOTES # 
 * The more I worked on this project the more I have learned to do things better and differntly as I progressed towards the end. It seems like theres a never-ending " better way" to do things in python. Once I solved a problem, left it and then came back to copy the function or whatever it was, to use it somewhere else I had found a better way to write the code. I could rewrite the code in this project over and over in endlessly different ways but that wouldnt get me anywhere so Ive settled for what Ive submitted here. Trying to make things work a "certain" way(thats to say how I saw them working in the narrow visoion of myminds eye) all the time was totally at my disadvatge. The problems, the way in which they arose and were eventually solved give my project flexibilty , which , from what Ive learned is more important than perfection.
 
+
+
+# TESTING
+`Testing In Gitpod`
+ Test     | Outcome     |   Pass/Fail  | 
+| :----     |    :----   |  :---- | 
+| Run run.py  | Everything loads up  | pass|
+| User enters input| Whatever the user enters does not crash the prgram | Pass |
+| Error handling for Workout functions/ user enters inavlaid input |  Everything the user enter the app haas a response and does not crash.  | Pass |
+| Error handling for Meal Functions |  Everything the user enter the app haas a response and does not crash. | Pass |
+| Weight Change Equations | All Calculations and results make sense| Pass |
+| ASCII image display | All ASCII images load properly| Pass |
+|Workout Schedule/Options| Chosen options are use and weeklty schedule makes sense | Pass |
+| Meal Schedule/Options | Chosen options are use and weeklty schedule makes sense | Pass |
+| Activity Factor | The activity factor is displayed when necessary | Pass |
+| Calories per day / amount of time need to acheive weight goal | All results make sense | Pass |
+
+
+`Testing In Heroku`
+ Test     | Outcome     |   Pass/Fail  | 
+| :----     |    :----   |  :---- | 
+| User enters input| Whatever the user enters does not crash the prgram | Pass |
+| Error handling for Workout functions/ user enters inavlaid input |  Everything the user enter the app haas a response and does not crash.  | Pass |
+| Error handling for Meal Functions |  Everything the user enter the app haas a response and does not crash. | Pass |
+| Weight Change Equations | All Calculations and results make sense| Pass |
+| ASCII image display | All ASCII images load properly| Pass |
+|Workout Schedule/Options| Chosen options are use and weeklty schedule makes sense | Pass |
+| Meal Schedule/Options | Chosen options are use and weeklty schedule makes sense | Pass |
+| Activity Factor | The activity factor is displayed when necessary | Pass |
+| Calories per day / amount of time need to acheive weight goal | All results make sense | Pass |
+
+
+
+|
