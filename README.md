@@ -29,7 +29,7 @@
 
 # Introduction #
 # ABOUT  # 
-* Welcome to the 1000 Sunny. What I have tried to create here is a basic and direct fitness web application. The name for this app "1000 Sunny" comes from my favorite manga One Piece, it is the name of the pirate ship they ride around in. The idea may be a little odd but I essentially am trying to create a Gym on the ship. It is not really essential to the functionality of the app but it gives me and the user a little context to opperate in. So the user is welcomed aboard the 1000 Sunny and then asked questions the correspond to their fitness goals and then the app  provides them with the proper information to help them get there. From what I have seen most fitness apps have too much going on and that repulses some people, the goal was to strip everything down to the basics and produce something minimalist but useful.
+* Welcome to the 1000 Sunny. What I have tried to create here is a basic and direct fitness web application. The name for this app "1000 Sunny" comes from my favorite manga One Piece, it is the name of the pirate ship they ride around in. The idea may be a little odd but I essentially am trying to create a Gym on the ship. It is not really essential to the functionality of the app but it gives me and the user a little context to opperate in. So the user is welcomed aboard the 1000 Sunny and then asked questions that correspond to their fitness goals and then the app  provides them with the proper information to help them get there. From what I have seen most fitness apps have too much going on and that repulses some people, the goal was to strip everything down to the basics and produce something minimalist but useful.
 
 *NOTE*
 * With respect to fitness and the science behind it ,almost all of the litterature is written in the lanaguage of male/female. I tried to to stay away from that completely. So I modified a lot of the typical equations to fit a more general and up to date point of view. I ask the user " what they identify as?" but that information is just fomality and has nothing to do with the calucations. Also as much as I can remember the user is refered to as They/Them. 
@@ -38,13 +38,13 @@
 # Features # 
 # Main Functions
 ## User Info
-* This is essentially the main function, it is the essential intersection of everything. I Ask the user for some simple information then this infomation called later. 
+* This is essentially the main function. It is the essential intersection of everything. I ask the user for some simple information then this infomation is called later. 
 * What is interesting about this function  are the bounds I place on the numerical inputs. I make sure the values are not too small or too big ( everything needs to be near human) so the BMR equation I use later makes sense.
 * ![user info bound 1](assets/images/ask_user_info.png)
 
 ## Weight Change 
 ### Weight Loss/Gain
-* This is the first function I wrote for this project , it essentially asks the user if they would like lose or gain weight then depending on their response responds accordingly and at the end gives them an estimated time it will take to achive this goal and how many calories per day they need to stay on mission. Nothing too fancy here , simple if/else condition.![Weight Change](assets/images/weight_change.png) 
+* This is the first function I wrote for this project , it essentially asks the user if they would like to lose or gain weight then depending on their response responds accordingly and at the end gives them an estimated time it will take to achive this goal and how many calories per day they need to stay on mission. Nothing too fancy here , simple if/else condition.![Weight Change](assets/images/weight_change.png) 
 and of course there is the error handling there to make sure the user enters lose or gain.
 
 ## Workout Functions 
@@ -69,13 +69,15 @@ Inside the suggest_weekly_schedule I extract weight ,height etc , from "user_inf
 * These functions do EXACTLY the same thing as the workout functions above so there is no need to explain them. The only diffence is in syntax, instead of workout types its food types , vegan, halal etc.![Meal Functions](assets/images/f1.4.meal-functions.png)
 * With respect to variety,I tried to give a decent variety of options, vegan , halal , gluten free, then whatever ( which is a mix of everything , I want this app to feel human and this is how I talk and I am human, also I want to create things that I would use and would like to see, programs that are more fluid and direct instead of the feeling that you are being used and the person behind the program is actually a robot themselves.)  
 
-## Clear Terminal / Image Display
+## Clear Terminal / Image Display 
+**NOTE**
+: This ended up not being used in the final version.
 * This is a pretty self explanatory function, I clear the terminal for each major "section" of the app then display and image. ![Clear Terminal](assets/images/clear_term.png). Was defintely more tricky to make work with all the other functions than I expected.
 
 
 # ASCII ART
 * Theres nothing too special going on here. I have four ASCII images displayed in the terminal.! [Girl Image](assets/images/ascii_girl.png)
-All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the Jolly Roger Pirate flag. [Jolly Roger](assets/images/ascii_pirate_flag.png)In the early stages that was the first or second part I added to this project. It essentially shaped everything else in my minds eye. Also you can the way the prirate flag is written is totally different from the other 3 ASCII images. This is because the pirate flag I did at the beginning of the project and the other images towards the very end.
+All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the Jolly Roger Pirate flag. [Jolly Roger](assets/images/ascii_pirate_flag.png)In the early stages that was the first or second part I added to this project. It essentially shaped everything else in my minds eye. Also you can the way the prirate flag is written is totally different from the other 3 ASCII images. This is because the pirate flag I did at the beginning of the project and the other images towards the very end. After doing the PEP8 validation I ended up changing the jolly roger to match the other images. Again not all these images are used in the final version of project which I explain in the problems section.
 
 ## WHILE LOOPS / Validation
 ** *NOTE* 
@@ -90,13 +92,13 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
  Test     | Outcome     |   Pass/Fail  | 
 | :----     |    :----   |  :---- | 
 | Run run.py  | Everything loads up  | pass|
-| User enters input| Whatever the user enters does not crash the prgram | Pass |
-| Error handling for Workout functions/ user enters inavlaid input |  Everything the user enter the app haas a response and does not crash.  | Pass |
-| Error handling for Meal Functions |  Everything the user enter the app haas a response and does not crash. | Pass |
+| User enters input| Whatever the user enters does not crash the program | Pass |
+| Error handling for Workout functions/ user enters invalid input |  Everything the user enters in the app has a response and does not crash.  | Pass |
+| Error handling for Meal Functions |  Everything the user enter the app has a response and does not crash. | Pass |
 | Weight Change Equations | All Calculations and results make sense| Pass |
-| ASCII image display | All ASCII images load properly| Pass |
+| ASCII image display | All ASCII images load properly| Fail |
 |Workout Schedule/Options| Chosen options are use and weeklty schedule makes sense | Pass |
-| Meal Schedule/Options | Chosen options are use and weeklty schedule makes sense | Pass |
+| Meal Schedule/Options | Chosen options are use and weekly schedule makes sense | Pass |
 | Activity Factor | The activity factor is displayed when necessary | Pass |
 | Calories per day / amount of time need to acheive weight goal | All results make sense | Pass |
 
@@ -104,8 +106,8 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 `Testing In Heroku`
  Test     | Outcome     |   Pass/Fail  | 
 | :----     |    :----   |  :---- | 
-| User enters input| Whatever the user enters does not crash the prgram | Pass |
-| Error handling for Workout functions/ user enters inavlaid input |  Everything the user enter the app haas a response and does not crash.  | Pass |
+| User enters input| Whatever the user enters does not crash the program | Pass |
+| Error handling for Workout functions/ user enters invalid input |  Everything the user enters in the app haas a response and does not crash.  | Pass |
 | Error handling for Meal Functions |  Everything the user enter the app haas a response and does not crash. | Pass |
 | Weight Change Equations | All Calculations and results make sense| Pass |
 | ASCII image display | All ASCII images load properly| Pass |
@@ -117,7 +119,7 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 
 # Things I Wanted Do
 - I spent a lot more time than I thought on displaying images in the terminal. Previously I had wanted to clear the terminal and display an image for each "section" but that quickly became a tangle of thorns. Too much extracting and rewritting. I ended up rewriting  and reaaraning so many times I lost track of what I was doing.
-- I wanted to make the whole appl "modular" but I didnt have time to completely wrap my head around that, I  started trying to figure it out, I put different fucntions in different files but I didnt have the time to really grasp it and finish it.
+- I wanted to make the whole app "modular" but I didnt have time to completely wrap my head around that, I  started trying to figure it out, I put different fucntions in different files but I didnt have the time to really grasp it and finish it.
 
 # PEP8 VALIDATION
 * Validator checks out.
@@ -141,5 +143,5 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 * The more I worked on this project the more I have learned to do things better and differntly as I progressed towards the end. It seems like theres a never-ending " better way" to do things in python. Once I solved a problem, left it and then came back to copy the function or whatever it was, to use it somewhere else I had found a better way to write the code. I could rewrite the code in this project over and over in endlessly different ways but that wouldnt get me anywhere so Ive settled for what Ive submitted here. Trying to make things work a "certain" way(thats to say how I saw them working in the narrow visoion of myminds eye) all the time was totally at my disadvatge. The problems, the way in which they arose and were eventually solved give my project flexibilty , which , from what Ive learned is more important than perfection.
 
 # CREDITS
-* I used youtube to help me with the while loops , chatGPT to help me find errors and suggest solutions and my mentor for evything else.
+* I used [Youtube](https://www.youtube.com/watch?v=BPdyZpXW9F8) to help me with the while loops , [CHATGPT](https://openai.com/blog/chatgpt) to help me find errors and suggest solutions and my mentor for evything else.
 
