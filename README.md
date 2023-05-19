@@ -120,8 +120,8 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 - I wanted to make the whole appl "modular" but I didnt have time to completely wrap my head around that, I  started trying to figure it out, I put different fucntions in different files but I didnt have the time to really grasp it and finish it.
 
 # PEP8 VALIDATION
-* Theres is a problem with certain lines that are no longer than 79 but have indents so I get an error in the validator.
-* ![pep8](assets/images/pep8.1.png)
+* Validator checks out.
+* ![pep8](assets/images/pep8.2.png)
 
 
 
@@ -141,5 +141,5 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 * The more I worked on this project the more I have learned to do things better and differntly as I progressed towards the end. It seems like theres a never-ending " better way" to do things in python. Once I solved a problem, left it and then came back to copy the function or whatever it was, to use it somewhere else I had found a better way to write the code. I could rewrite the code in this project over and over in endlessly different ways but that wouldnt get me anywhere so Ive settled for what Ive submitted here. Trying to make things work a "certain" way(thats to say how I saw them working in the narrow visoion of myminds eye) all the time was totally at my disadvatge. The problems, the way in which they arose and were eventually solved give my project flexibilty , which , from what Ive learned is more important than perfection.
 
 # CREDITS
-* I used yotube to help me with the while loops , chatGPT to help me find errors and suggest solotions and my mentor for evything else.
+* I used youtube to help me with the while loops , chatGPT to help me find errors and suggest solutions and my mentor for evything else.
 
