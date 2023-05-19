@@ -126,9 +126,9 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 
 
 # Bugs #
-* I dont even know where to start with the bugs. I had so many throoughout the whoel project,but I think they are all more or less resolved. The error handling was long. I had to learn and relearn a lot and Im still not totally sure. Looping and itietering overlist and and then checking things were input properly and looping again made space for so many bugs. Theres one thing I couldnt solve or didnt have the time to solve. I try my best to explain in plain english . NOUBLIE PAS A FAIRE CA 
+* I dont even know where to start with the bugs. I had so many throoughout the whoel project,but I think they are all more or less resolved. The error handling was long. I had to learn and relearn a lot and Im still not totally sure. Looping and itietering overlist and and then checking things were input properly and looping again made space for so many bugs. Theres one thing I couldnt solve or didnt have the time to solve. I try my best to explain in plain english . 
 
-an optio
+
 # Problems
 ## ASSCI Image Display 
 * I havent beeen to find a solution to the way I display images in the terminal.![Image Problem](assets/images/image_terminal_problem.png).It just doesnt display nicely and  it happens so fast  user is not aware that some results are above the image.The first thing I tried was moving all the user results to the very end of the program but that was more difficult than expected and I ened rewritting things akwardly.
