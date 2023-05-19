@@ -1,6 +1,6 @@
 # 1000 SUNNY FITNESS ##
 
-[Project 3](project_3)
+[Project 3](https://github.com/BIBI78/1000SunnyFitness)
 
 ![ Main images](assets/images/1000sunny.webp)
 
@@ -23,7 +23,7 @@
     - [Bugs](#bugs)
     -[Problems](#problems)
   - [Deployment](#deployment)
-  - [Things I wanted to do but did not have the time](#things-i-wanted-to-do-but-did not have the time)
+  - [Things I wanted to do but did not have the time](#things-i-wanted-to-do)
   - [Credits and Acknowledgements](#credits)
   - [Notes](#notes)
 
@@ -121,7 +121,7 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 
 # PEP8 VALIDATION
 * Theres is a problem with certain lines that are no longer than 79 but have indents so I get an error in the validator.
-* ![pep8] (assets/images/pep8.1.png)
+* ![pep8](assets/images/pep8.1.png)
 
 
 
