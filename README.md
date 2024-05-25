@@ -125,6 +125,9 @@ All the images I got from here [ASCII ART](https://www.asciiart.eu/) except the 
 * Validator checks out.
 * ![pep8](assets/images/pep8.2.png)
 
+# Deployment
+- Run this command in the terminal : python run.py 
+
 
 
 # Bugs #
